@@ -11,9 +11,9 @@
     left: 0;
     right: 0;
     top: 0;
-    padding: 180px 0;
+    padding: 100px 0;
     @include md {
-      padding: 180px 0 70px;
+      padding: 100px 0 70px;
     }
   }
   .page-heading {
@@ -116,7 +116,7 @@
   }
 
   p {
-    color: var(--paragraph-color, #726b7d);
+    color: var(--paragraph-color, #050407);
     text-align: center;
     font-family: $title-font;
     font-size: 18px;

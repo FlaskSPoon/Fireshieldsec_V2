@@ -1,4 +1,5 @@
 "use client";
+
 import { SwiperSlide, Swiper } from "swiper/react";
 import { EffectFade } from "swiper/modules";
 import { slidesData } from "@/data/heroSlides";

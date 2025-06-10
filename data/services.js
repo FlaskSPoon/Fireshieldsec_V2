@@ -319,34 +319,8 @@ export const ressourceItems = [
     text: "Identifiez les attaques de phishing.",
     delay: "1s"
   },
-  {
-    id: 25,
-    imgSrc: "/assets/img/icon/serviceIcon1_6.png",
-    title: "Dispositifs Mobiles",
-    text: "Sécurisez vos appareils mobiles.",
-    delay: "1.3s"
-  },
-  {
-    id: 26,
-    imgSrc: "/assets/img/icon/serviceIcon1_7.png",
-    title: "Données en Ligne",
-    text: "Protégez vos données lors de leur stockage.",
-    delay: "1.7s"
-  },
-  {
-    id: 27,
-    imgSrc: "/assets/img/icon/serviceIcon1_8.png",
-    title: "Réseaux internes",
-    text: "Gérez pare-feu, VPN et outils de surveillance.",
-    delay: "1.8s"
-  },
-  {
-    id: 28,
-    imgSrc: "/assets/img/icon/serviceIcon1_9.png",
-    title: "Incidents/ménaces",
-    text: "Réagissez aux ménaces de sécurité.",
-    delay: "2s"
-  }
+ 
+ 
 ];
 
 export const allService = [

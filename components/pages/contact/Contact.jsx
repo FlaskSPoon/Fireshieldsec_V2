@@ -82,9 +82,9 @@ export default function Contact() {
                         <h3>
                           {email1 && <a href={`mailto:${email1}`}>{email1}</a>}
                         </h3>
-                        {/* <h3>
+                        <h3>
                           {email2 && <a href={`mailto:${email2}`}>{email2}</a>}
-                        </h3> */}
+                        </h3>
                       </div>
                     </div>
                     <div className="contact-info-items border-none">
@@ -142,9 +142,11 @@ export default function Contact() {
                       Restons en contact pour sécuriser votre entreprise
                     </h2>
                     <p>
-                      Besoin d’une expertise en cybersécurité ? Notre équipe est
-                      disponible pour répondre à vos questions et vous
-                      accompagner dans la sécurisation de vos systèmes
+                      Vous voulez accéder à nos services ou devenir partenaire ?{" "}
+                      <br />
+                      Besoin d’une expertise en cybersécurité ? <br />
+                      Notre équipe est disponible pour répondre à vos questions
+                      et vous accompagner dans la sécurisation de vos systèmes
                     </p>
                   </div>
                   <form

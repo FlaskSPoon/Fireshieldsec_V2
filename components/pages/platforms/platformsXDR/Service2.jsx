@@ -10,37 +10,21 @@ export default function Service2() {
     >
       <div className="container">
         <div className="about-wrapper style4">
-          <div className="about-thumb-box  wow fadeInUp" data-wow-delay=".3s">
-            <div className="about-thumb-box about-thumb1">
+          <div className="flex items-center gap-8"data-wow-delay=".3s">
+      
+            
+            <div className="w-1/2">
               <Image
                 data-tilt=""
-                data-tilt-max={10}
+                data-tilt-max={25}
                 alt="thumb"
-                src="/assets/img/about/aboutThumb4_1.png"
-                width="465"
-                height="230"
+                src="/assets/img/about/t4.jpg"
+                width="700"
+                height="1200"
+                style={{objectFit:"cover", width:"100%", height:"auto"}}
               />
             </div>
-            <div className="about-thumb-box about-thumb2">
-              <Image
-                data-tilt=""
-                data-tilt-max={20}
-                alt="thumb"
-                src="/assets/img/about/aboutThumb4_2.png"
-                width="542"
-                height="474"
-              />
-            </div>
-            <div className="about-thumb-box about-thumb3">
-              <Image
-                data-tilt=""
-                data-tilt-max={10}
-                alt="thumb"
-                src="/assets/img/about/aboutThumb4_3.png"
-                width="219"
-                height="188"
-              />
-            </div>
+           
           </div>
           <div className="about-content  wow fadeInUp" data-wow-delay=".6s">
             <div className="title-area">

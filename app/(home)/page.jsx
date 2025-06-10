@@ -9,6 +9,7 @@ import Services from "@/components/pages/home/Services";
 import Services2 from "@/components/pages/home/Services2";
 import VideoBox from "@/components/pages/home/VideoBox";
 import SeoMeta from "@/components/common/SeoMeta";
+
 export const metadata = {
   title: "Accueil | Fireshield Security",
   description:

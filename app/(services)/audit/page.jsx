@@ -1,5 +1,3 @@
-
-"use client"
 import SeoMeta from "@/components/common/SeoMeta";
 import Cta from "@/components/footers/Cta";
 import { conseils, gouvernance } from "@/data/conseilAudit";
@@ -8,42 +6,52 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+export const metadata = {
+  title: "Conseil, Audit et Gouvernance du SI | Fireshield Security",
+  description:
+    "Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection"
+};
+
 export default function Audit() {
   return (
     <>
-      <div className="container-fluid">
-        <motion.h2
-          className="text-center text-dark mt-2"
-          style={{
-            backgroundImage: "url('/assets/img/about/global.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            width: "100vw",
-            minHeight: "50vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            padding: "130px",
-            color: "white",
-          }}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          Conseil, Audit<br />
-          et Gouvernance du SI
-        </motion.h2>
-      </div>
-      <main className="text-center border w-[200px] p-2 card">
-        <h2>AUDIT DE SÉCURITÉ</h2>
+      <SeoMeta title={metadata.title} />
+      <main className="main position-relative" id="mains">
+        <div className="breadcrumb-wrapper">
+          <div
+            className="breadcumb"
+            data-bg-src=""
+            style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
+          >
+            <div className="container">
+              <div className="page-heading">
+                <h1 className="wow fadeInUp" data-wow-delay=".3s">
+                  Conseil, Audit et Gouvernance du Système d'Information
+                </h1>
+                <ul
+                  className="breadcrumb-items wow fadeInUp"
+                  data-wow-delay=".5s"
+                >
+                  <li>
+                    <Link scroll={false} href={`/`}>
+                      {" "}
+                      Accueil{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <i className="fas fa-chevrons-right" />
+                  </li>
+                  <li>Service</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="text-center w-[200px] p-2 ">
           <section>
             <div className="mt-50">
-            
+              <h2>AUDIT DE SÉCURITÉ</h2>
               <div className="container">
                 <div className="row">
                   <div className="">
@@ -125,7 +133,9 @@ export default function Audit() {
                                 {service.title}
                               </Link>
                             </h3>
-                            <p className="text-container">{service.description}</p>
+                            <p className="text-container">
+                              {service.description}
+                            </p>
                             <div className="btn-wrapper p-2">
                               <Link
                                 scroll={false}
@@ -170,7 +180,9 @@ export default function Audit() {
                                   {service.title}
                                 </Link>
                               </h3>
-                              <p className="text-container">{service.description}</p>
+                              <p className="text-container">
+                                {service.description}
+                              </p>
                               <div className="btn-wrapper p-2">
                                 <Link
                                   scroll={false}
@@ -198,34 +210,4 @@ export default function Audit() {
       </main>
     </>
   );
-}
-
-{
-  /* <div className="container">
-  <motion.h2
-    className="text-center text-dark mt-2"
-    style={{
-      backgroundImage: "url('/assets/img/about/global.png')",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      width: "100vw",
-      minHeight: "50vh",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center",
-      padding: "130px",
-      color: "white"
-    }}
-    initial={{ opacity: 0, y: -50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
-  >
-    Conseil, Audit
-    <br />
-    et Gouvernance du SI
-  </motion.h2>
-</div> */
 }

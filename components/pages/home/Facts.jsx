@@ -1,7 +1,7 @@
 import { counterBoxes } from "@/data/facts";
 import React from "react";
 import Image from "next/image";
-import Counter from "@/components/common/Counter";
+
 
 export default function Facts() {
   return (
@@ -18,11 +18,7 @@ export default function Facts() {
                 <Image src={box.icon} width={60} height={60} alt="icon" />
               </div>
               <div className="counter-box_counter">
-                <div>
-                  <Counter parentClass={"counter-number"} max={box.number} />
-
-                  <span className="plus">+</span>
-                </div>
+                
                 <span>{box.label}</span>
               </div>
             </div>

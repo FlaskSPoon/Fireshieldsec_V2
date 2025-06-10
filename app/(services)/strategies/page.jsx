@@ -1,129 +1,272 @@
-"use client"
-import Link from 'next/link';
-import { motion } from "framer-motion";
+import SeoMeta from "@/components/common/SeoMeta";
 import Cta from "@/components/footers/Cta";
-import React from "react";
+import { conseils, gouvernance } from "@/data/conseilAudit";
+import { audits } from "@/data/servicesG";
 import Image from "next/image";
-import { detection, proteger, reponse, strategie } from '@/data/strategie';
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {detection, proteger, reponse, strategie} from "@/data/strategie";
 
+export const metadata = {
+  title: "Stratégie, Cybersécurité et Consulting| Fireshield Security",
+  description:
+    "Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection"
+};
 
+export default function Strategie() {
 
-export default function Page() {
-
-
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-  const fadeInLeft = {
-    initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-  };
   return (
     <>
-    
-    <main>
-      
-      <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="border rounded text-center">
-        <h1 style={{
-          backgroundImage: "url('/assets/img/hero/blue-colos.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100vw",
-          minHeight: "50vh",
-          display: "flex",
-          flexDirection: "column",
-          textAlign: "center",
-          padding: "60px",
-          color: "white"
-        }}>
-          Stratégie, Cybersécurité et Consulting
-        </h1>
-      </motion.div>
-
-      <div className="my-5 text-white">
-        <motion.h2 initial="hidden" whileInView="visible" variants={fadeInLeft} className="text-danger text-center">
-          STRATÉGIE DE SÉCURITÉ
-        </motion.h2>
-        <div className="service-card-wrapper style2 p-4 d-flex justify-items-center">
-          {strategie.map((service, index) => (
-            <motion.div initial="hidden" whileInView="visible" variants={fadeInUp} key={index}>
-              <div className="service-content">
-                <Image className="d-flex justify-content-center" alt="icon" src={service.bgImage} width={40} height={30} />
-                <h6 className="service-content_title">
-                  <Link scroll={false} href={`/audit/${service.id}`}>{service.title}</Link>
-                </h6>
-                <p className="service-content_text">{service.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-       
-
-        <motion.h2 initial="hidden" whileInView="visible" variants={fadeInLeft} className="text-center bg-info">
-          DETECTION
-        </motion.h2>
-        <div className="service-card-wrapper style2 p-4">
-          {detection.map((service, index) => (
-            <motion.div initial="hidden" whileInView="visible" variants={fadeInUp} key={index}>
-              <div className="service-content">
-                <Image className="d-flex justify-content-center" alt="icon" src={service.bgImage} width={40} height={30} />
-                <h6 className="service-content_title">
-                  <Link scroll={false} href={`/audit/${service.id}`}>{service.title}</Link>
-                </h6>
-                <p className="service-content_text">{service.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-          <div className="mt-50 mb-5">
-            <h5 className="bg-danger text-white text-center fs-3 p-2 card">
-              REPONSE
-            </h5>
-            <div className="service-card-wrapper style2 p-4">
-              {reponse.map((service, index) => (
-                <div className="service-content">
-                  {/* <Image className="d-flex justify-content-center" alt="icon" src={service.bgImage} width={40} height={10} /> */}
-                  <h6 className="service-content_title">
-                    <Link scroll={false} href={`/audit/${service.id}`}>
-                      {service.title}
+      <SeoMeta title={metadata.title} />
+      <main className="main position-relative" id="mains">
+        <div className="breadcrumb-wrapper">
+          <div
+            className="breadcumb"
+            data-bg-src=""
+            style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
+          >
+            <div className="container">
+              <div className="page-heading">
+                <h1 className="wow fadeInUp" data-wow-delay=".3s">
+                Stratégie, Cybersécurité et Consulting
+                </h1>
+                <ul
+                  className="breadcrumb-items wow fadeInUp"
+                  data-wow-delay=".5s"
+                >
+                  <li>
+                    <Link scroll={false} href={`/`}>
+                      {" "}
+                      Accueil{" "}
                     </Link>
-                  </h6>
-                  <p className="service-content_text">{service.description}</p>
-                </div>
-              ))}
+                  </li>
+                  <li>
+                    <i className="fas fa-chevrons-right" />
+                  </li>
+                  <li>Service</li>
+                </ul>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="mt-50 mb-5">
-            <h5 className="bg-danger text-white text-center fs-3 p-2 card">
-              PROTÉGER
-            </h5>
-            <div className="service-card-wrapper style2 p-4">
-              {proteger.map((service, index) => (
-                <div className="service-content">
-                  <h6 className="service-content_title">
-                    <Link scroll={false} href={`/audit/${service.id}`}>
-                      {service.title}
-                    </Link>
-                  </h6>
-                  <p className="service-content_text">{service.description}</p>
+        <div className="text-center w-[200px] p-2 "> {/* avant dernierre div*/}
+          <section>
+            <div className="mt-50">
+              <h2> STRATÉGIE DE SÉCURITÉ</h2>
+              <div className="container">
+                <div className="row">
+                  <div className="">
+                    <div className="bg-base-100 w-96 shadow-sm">
+                      <figure className="px-1 pt-1"></figure>
+
+                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                        {strategie.map((service, index) => (
+                          <div
+                            className="service-card style4 wow fadeInUp"
+                            data-wow-delay={service.delay}
+                            key={index}
+                          >
+                            <div className="service-icon">
+                              <Image
+                                src={service.icon}
+                                width={100}
+                                height={20}
+                                alt="icon"
+                              />
+                            </div>
+                            <h3 className="service-title">
+                              <Link scroll={false} href={`/service-1`}>
+                                {service.title}
+                              </Link>
+                            </h3>
+                            <p className="text">{service.description}</p>
+                            <p className="text text-danger">
+                              {service.details}
+                            </p>
+                            <p className="text text-danger">
+                              {" "}
+                              {service.detailsplus}
+                            </p>
+
+                            <div className="btn-wrapper">
+                              <Link
+                                scroll={false}
+                                className="link-btn"
+                                href={`/service-details/${service.id}`}
+                              >
+                                En savoir plus{" "}
+                                <i className="fa-sharp fa-light fa-arrow-right-long" />
+                              </Link>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-          <div className="ms-3">
-            <Link
-              scroll={false}
-              href={`/contact`}
-              className="gt-btn gt-btn-icon"
-            >
-              EN SAVOIR PLUS
-            </Link>
-          </div>
+
+            <div className="mt-50">
+              <h2>DÉTECTION</h2>
+              <div className="container">
+                <div className="row">
+                  <div className="">
+                    <div className="bg-base-100 w-96 shadow-sm">
+                      <figure className="px-1 pt-1"></figure>
+
+                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                        {detection.map((service, index) => (
+                          <div
+                            className="service-card style4 wow fadeInUp"
+                            data-wow-delay={service.delay}
+                            key={index}
+                          >
+                            <div className="service-icon">
+                              <Image
+                                src={service.icon}
+                                width={100}
+                                height={20}
+                                alt="icon"
+                              />
+                            </div>
+                            <h3 className="service-title">
+                              <Link scroll={false} href={`/service-1`}>
+                                {service.title}
+                              </Link>
+                            </h3>
+                            <p className="text">{service.description}</p>
+                            <p className="text text-danger">
+                              {service.details}
+                            </p>
+                            <p className="text text-danger">
+                              {" "}
+                              {service.detailsplus}
+                            </p>
+
+                            <div className="btn-wrapper">
+                              <Link
+                                scroll={false}
+                                className="link-btn"
+                                href={`/service-details/${service.id}`}
+                              >
+                                En savoir plus{" "}
+                                <i className="fa-sharp fa-light fa-arrow-right-long" />
+                              </Link>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div className="mt-50">
+              <h2>RÉPONSE</h2>
+              <div className="container">
+                <div className="row">
+                  <div className="">
+                    <div className="bg-base-100 w-96 shadow-sm">
+                      <figure className="px-1 pt-1"></figure>
+
+                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                        {reponse.map((service, index) => (
+                          <div
+                            className="service-card style4 wow fadeInUp"
+                            data-wow-delay={service.delay}
+                            key={index}
+                          >
+                            <div className="service-icon">
+                              <Image
+                                src={service.icon}
+                                width={100}
+                                height={20}
+                                alt="icon"
+                              />
+                            </div>
+                            <h3 className="service-title">
+                              <Link scroll={false} href={`/service-1`}>
+                                {service.title}
+                              </Link>
+                            </h3>
+                            <p className="text-container">
+                              {service.description}
+                            </p>
+                            <div className="btn-wrapper p-2">
+                              <Link
+                                scroll={false}
+                                className="link-btn"
+                                href={`/service-details/${service.id}`}
+                              >
+                                En savoir plus{" "}
+                                <i className="fa-sharp fa-light fa-arrow-right-long" />
+                              </Link>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-50">
+                <div className="container">
+                  <div className="row">
+                    <div className="">
+                      <div className="bg-base-100 w-96 shadow-sm">
+                        <figure className="px-1 pt-1"></figure>
+                        <h2 className=" p-4 text-dark">PROTÉGER</h2>
+                        <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                          {proteger.map((service, index) => (
+                            <div
+                              className="service-card style4 wow fadeInUp"
+                              data-wow-delay={service.delay}
+                              key={index}
+                            >
+                              <div className="service-icon">
+                                <Image
+                                  src={service.icon}
+                                  width={100}
+                                  height={20}
+                                  alt="icon"
+                                />
+                              </div>
+                              <h3 className="service-title">
+                                <Link scroll={false} href={`/service-1`}>
+                                  {service.title}
+                                </Link>
+                              </h3>
+                              <p className="text-container">
+                                {service.description}
+                              </p>
+                              <div className="btn-wrapper p-2">
+                                <Link
+                                  scroll={false}
+                                  className="link-btn"
+                                  href={`/service-details/${service.id}`}
+                                >
+                                  En savoir plus{" "}
+                                  <i className="fa-sharp fa-light fa-arrow-right-long" />
+                                </Link>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+            
+          </section>
         </div>
 
         <div className="pb-300" />

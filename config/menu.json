@@ -65,19 +65,19 @@
       "children": [
         {
           "name": "Présentation des collaborations stratégiques",
-          "url": "/"
+          "url": "/partenaires/presentation"
         },
         {
           "name": "Certifications obtenues grâce aux partenaires",
-          "url": "/"
+          "url": "/partenaires/certifications"
         },
         {
           "name": "Opportunités pour devenir partenaire de Fireshield Security",
-          "url": "/"
+          "url": "/partenaires/opportunites"
         },
         {
           "name": "Autres partenariats",
-          "url": "/"
+          "url": "/partenaires/autre-partenaires"
         }
       ]
     },
@@ -194,6 +194,10 @@
     {
       "name": "Nous Contacter",
       "url": "/Contact"
+    },
+    {
+      "name": "Politiques de confidentialité",
+      "url": "/politiques-de-confidentialite"
     }
   ]
 }

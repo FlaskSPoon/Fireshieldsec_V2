@@ -5,6 +5,8 @@ import Features from "@/components/pages/platforms/platformsXDR/Features";
 import Hero from "@/components/pages/platforms/platformsXDR/Hero";
 import Service2 from "@/components/pages/platforms/platformsXDR/Service2";
 import Services from "@/components/pages/platforms/platformsXDR/Services";
+
+
 export const metadata = {
   title: "Plateforme XDR | Fireshield Security",
   description:

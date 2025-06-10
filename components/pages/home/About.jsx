@@ -22,7 +22,7 @@ export default function About() {
           <div className="shape1_2 movingX d-xl-block d-none">
             <Image
               alt="shape"
-              src="/assets/img/shape/aboutShape1_2.png"
+              src="/assets/img/favicon.png"
               width="188"
               height="275"
             />

@@ -2,7 +2,7 @@
 
 import "../public/assets/scss/styles.scss";
 import MobileNav from "@/components/headers/MobileNav";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import SiteMenu from "@/components/headers/SiteMenu";
 import ScrollTop from "@/components/common/ScrollTop";
 import CursorFollor from "@/components/common/CursorFollor";
@@ -12,6 +12,7 @@ import PopupSearch from "@/components/headers/PopupSearch";
 import Footer from "@/components/footers/Footer";
 import Header from "@/components/headers/Header";
 import HeaderTop from "@/components/headers/HeaderTop";
+import Loading from "./loading";
 
 export default function RootLayout({ children }) {
   const path = usePathname();
@@ -78,7 +79,7 @@ export default function RootLayout({ children }) {
         />
         <HeaderTop />
         <Header />
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
         <CursorFollor />
         <ScrollTop />
         <Footer />

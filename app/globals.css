@@ -6,7 +6,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --bakground: #171717;
     --foreground: #ededed;
   }
 }
@@ -41,6 +41,10 @@ a {
     color-scheme: dark;
   }
 }
+<<<<<<< HEAD
+
+
+=======
 /* Animation pour la main */
 @keyframes point {
   0% {
@@ -70,3 +74,4 @@ a {
   min-height: 600px;
   background: blueviolet;
 }
+>>>>>>> 76ac14aeb8934a3d24f34cc9673eacb586522165

@@ -16,8 +16,7 @@ import { activePopupSearch } from "@/utlis/togglePopupSearch";
 export default function Footer() {
   // data source
   const { logo, title } = config.site;
-  const { phone1, phone2, email1, email2, location, opening } =
-    config.contact_info;
+  const { phone1, phone2, email1, location, opening } = config.contact_info;
   const { footer_content, copyright } = config.params;
 
   const form = useRef();
@@ -71,7 +70,7 @@ export default function Footer() {
           <Image
             src="/assets/img/shape/footerShape2_2.png"
             width={288}
-            height={383}
+            height={250}
             alt="shape"
           />
         </div>
@@ -175,47 +174,44 @@ export default function Footer() {
                   data-wow-delay="1.6s"
                 >
                   <h3 className="widget_title">
-                   
-                     <Link
-                    scroll={false}
-                    href={`/contact`}
-                    className="gt-btn gt-btn-icon"
-                  >
-                  NOUS CONTACTER
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={activeSideMenu}
-                    className="simple-icon sideMenuInfo sidebar-btn"
-                  >
-                    
-                  </button></h3>
-                  <div className="checklist mt-5">
-                    {/* s */}
-                    {/* <ul className="ps-0">
+                    <Link
+                      scroll={false}
+                      href={`/contact`}
+                      className="gt-btn gt-btn-icon"
+                    >
+                      NOUS CONTACTER
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={activeSideMenu}
+                      className="simple-icon sideMenuInfo sidebar-btn"
+                    ></button>
+                  </h3>
+                  <div className="checklist">
+                    <ul className="ps-0">
                       <li className="text-white">
                         <i className="fa-thin fa-envelope" />
                       </li>
-                      <li className="text-white">{email2}</li>
-                    </ul> */}
-                    {/* <ul className="ps-0">
+                      <li className="text-white">{email1}</li>
+                    </ul>
+                    <ul className="ps-0">
                       <li className="text-white">
                         <i className="fa-light fa-phone-volume" />
                       </li>
                       <li className="text-white">{phone1}</li>
-                    </ul> */}
-                    {/* <ul className="ps-0">
+                    </ul>
+                    <ul className="ps-0">
                       <li className="text-white">
                         <i className="fa-light fa-phone-volume" />
                       </li>
                       <li className="text-white">{phone2}</li>
-                    </ul> */}
-                    {/* <ul className="ps-0">
+                    </ul>
+                    <ul className="ps-0">
                       <li className="text-white">
                         <i className="fa-regular fa-clock" />
                       </li>
                       <li className="text-white">{opening}</li>
-                    </ul> */}
+                    </ul>
                     <form
                       ref={form}
                       onSubmit={sandMail}
@@ -270,10 +266,13 @@ export default function Footer() {
             </div>
             <div className="layout-link wow fadeInUp" data-wow-delay=".6s">
               <div className="link-wrapper">
-                <Link scroll={false} href={`/CGU`}>
+                <Link scroll={false} href={`/mention-legal`}>
+                  Mentions Légales{" "}
+                </Link>
+                <Link scroll={false} href={`/termes-conditions`}>
                   Termes &amp; Conditions{" "}
                 </Link>
-                <Link scroll={false} href={`/privacyPolicy`}>
+                <Link scroll={false} href={`/privacy-policy`}>
                   Notre politique
                 </Link>
               </div>

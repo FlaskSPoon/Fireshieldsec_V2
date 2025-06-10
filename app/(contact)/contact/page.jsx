@@ -13,7 +13,7 @@ export default function Page() {
     <>
       <SeoMeta title={metadata.title} />
       <main className="main position-relative" id="mains">
-        <div className="breadcrumb-wrapper">
+        {/* <div className="breadcrumb-wrapper">
           <div
             className="breadcumb"
             data-bg-src=""
@@ -22,14 +22,14 @@ export default function Page() {
             <div className="container">
               <div className="page-heading">
                 <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                  Support Technique & Contact
+                  Nous contacter
                 </h1>
                 <ul
                   className="breadcrumb-items wow fadeInUp"
                   data-wow-delay=".5s"
                 >
                   <li>
-                    <Link scroll={false} href={`/#`}>
+                    <Link scroll={false} href={`/`}>
                       {" "}
                       Accueil{" "}
                     </Link>
@@ -42,7 +42,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <Contact />
         <Map />
         <Cta />

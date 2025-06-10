@@ -5,7 +5,7 @@ import { sensibilisation } from "@/data/formation";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react"; // Importez useEffect
-
+import Cta from "@/components/footers/Cta";
 export default function Sensibilsations() {
 
 
@@ -44,9 +44,36 @@ export default function Sensibilsations() {
     <>
 
 <SeoMeta title={metadata.title} />
-      <div className="">
-        
-      </div>
+<div className="breadcrumb-wrapper">
+          <div
+            className="breadcumb"
+            data-bg-src=""
+            style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
+          >
+            <div className="container">
+              <div className="page-heading">
+                <h1 className="wow fadeInUp" data-wow-delay=".3s">
+               Sensibilisation En Cybersécurité
+                </h1>
+                <ul
+                  className="breadcrumb-items wow fadeInUp"
+                  data-wow-delay=".5s"
+                >
+                  <li>
+                    <Link scroll={false} href={`/`}>
+                      {" "}
+                      Accueil{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <i className="fas fa-chevrons-right" />
+                  </li>
+                  <li>Service</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       <div className="container p-2">
         <div className="row d-flex align-items-center">
           {/* Première carte */}
@@ -120,9 +147,9 @@ export function Sensibilisation() {
     
     <>
     <SeoMeta title={metadata.title}s />
-      <div className="p-4 text-center">
+      <div className="p-2 text-center  pb-425">
         <h3 className="">SENSIBILISATION</h3>
-        <div className="container-fluid">
+        <div className="container pb-425">
           <div className="service-card-wrapper style2 p-4">
             {sensibilisation.map((service, index) => (
               <div
@@ -130,9 +157,9 @@ export function Sensibilisation() {
                 data-wow-delay={service.delay}
                 key={index}
               >
-                <div className="service-thumb"></div>
+                <div className="service-thumb " ></div>
                 <div className="service-content">
-                  <h3 className="service-content_title">
+                  <h3 className="service-content_title ">
                     <Link scroll={false} href={`/audit/${service.id}`}>
                       {service.title}
                     </Link>
@@ -156,7 +183,8 @@ export function Sensibilisation() {
       <div>
       
       </div>
+      <Cta  
+      />
     </>
   );
 }
-

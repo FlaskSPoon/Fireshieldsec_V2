@@ -7,17 +7,19 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tailwindcss-init": "tailwindcss init -p"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
-    "framer-motion": "^12.4.10",
+    "framer-motion": "^12.4.7",
     "github-slugger": "^2.0.0",
     "marked": "^14.1.0",
     "next": "15.1.7",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-modal-video": "^2.0.2",
@@ -30,9 +32,15 @@
     "@eslint/eslintrc": "^3",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
+    "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.23",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.7",
     "typescript": "^5.7.3"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/FlaskSPoon/fireshieldsec_v1.git",
+  "license": "MIT"
 }
