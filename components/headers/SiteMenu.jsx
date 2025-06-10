@@ -117,7 +117,7 @@ export default function SiteMenu() {
                   height="16"
                 />
               </div>
-              <div className="details">
+              {/* <div className="details">
                 <p>
                   <a href={`tel: ${phone1}`} className="info-box_link">
                   {phone1}
@@ -128,7 +128,7 @@ export default function SiteMenu() {
                   {phone2}
                   </a>
                 </p>
-              </div>
+              </div> */}
             </div>
             <div className="info-box_text">
               <div className="icon">

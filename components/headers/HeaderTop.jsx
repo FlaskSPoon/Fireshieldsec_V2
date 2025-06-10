@@ -18,14 +18,14 @@ export default function HeaderTop() {
                 {email1}
               </a>
             </li>
-            <li>
+            {/* <li>
               <i className="fa-solid fa-phone-volume" />
               <a href={`tel:${phone1}`}>{phone1}</a>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <i className="fa-solid fa-phone-volume" />
               <a href={`tel:${phone2}`}>{phone2}</a>
-            </li>
+            </li> */}
           </ul>
           <div className="top-right">
             <div className="social-icon d-flex align-items-center">

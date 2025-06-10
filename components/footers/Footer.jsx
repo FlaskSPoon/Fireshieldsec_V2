@@ -194,7 +194,7 @@ export default function Footer() {
                       </li>
                       <li className="text-white">{email1}</li>
                     </ul>
-                    <ul className="ps-0">
+                    {/* <ul className="ps-0">
                       <li className="text-white">
                         <i className="fa-light fa-phone-volume" />
                       </li>
@@ -205,7 +205,7 @@ export default function Footer() {
                         <i className="fa-light fa-phone-volume" />
                       </li>
                       <li className="text-white">{phone2}</li>
-                    </ul>
+                    </ul> */}
                     <ul className="ps-0">
                       <li className="text-white">
                         <i className="fa-regular fa-clock" />
