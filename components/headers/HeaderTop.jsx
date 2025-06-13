@@ -12,12 +12,12 @@ export default function HeaderTop() {
       <div className="container">
         <div className="header-top-wrapper">
           <ul className="contact-list">
-            <li>
+            {/* <li>
               <i className="far fa-envelope" />
               <a href={`mailto:${email1}`} className="link">
                 {email1}
               </a>
-            </li>
+            </li> */}
             {/* <li>
               <i className="fa-solid fa-phone-volume" />
               <a href={`tel:${phone1}`}>{phone1}</a>

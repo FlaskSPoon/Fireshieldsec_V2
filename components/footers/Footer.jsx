@@ -190,9 +190,9 @@ export default function Footer() {
                   <div className="checklist">
                     <ul className="ps-0">
                       <li className="text-white">
-                        <i className="fa-thin fa-envelope" />
+                        {/* <i className="fa-thin fa-envelope" /> */}
                       </li>
-                      <li className="text-white">{email1}</li>
+                      {/* <li className="text-white">{email1}</li> */}
                     </ul>
                     {/* <ul className="ps-0">
                       <li className="text-white">

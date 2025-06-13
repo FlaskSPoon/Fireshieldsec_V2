@@ -109,14 +109,14 @@ export default function SiteMenu() {
               </div>
             </div>
             <div className="info-box_text">
-              <div className="icon">
+              {/* <div className="icon">
                 <Image
                   alt="img"
                   src="/assets/img/icon/phone.svg"
                   width="16"
                   height="16"
                 />
-              </div>
+              </div> */}
               {/* <div className="details">
                 <p>
                   <a href={`tel: ${phone1}`} className="info-box_link">
@@ -131,30 +131,30 @@ export default function SiteMenu() {
               </div> */}
             </div>
             <div className="info-box_text">
-              <div className="icon">
+              {/* <div className="icon">
                 <Image
                   alt="img"
                   src="/assets/img/icon/envelope.svg"
                   width="19"
                   height="16"
                 />
-              </div>
+              </div> */}
               <div className="details">
                 <p>
-                  <a
+                  {/* <a
                     href={`mailto: ${email1}`}
                     className="info-box_link"
                   >
                     {email1}
-                  </a>
+                  </a> */}
                 </p>
                 <p>
-                  <a
+                  {/* <a
                     href={`mailto: ${email2}`}
                     className="info-box_link"
                   >
                     {email2}
-                  </a>
+                  </a> */}
                 </p>
               </div>
             </div>
