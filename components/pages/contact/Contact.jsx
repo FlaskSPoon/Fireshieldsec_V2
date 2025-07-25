@@ -65,19 +65,19 @@ export default function Contact() {
                       </div>
                       <div className="content">
                         <p>Disponible 24h/24 et 7j/7 </p>
-                        <h3>
+                        {/* <h3>
                           {phone1 && <a href={`tel:${phone1}`}>{phone1}</a>}
                         </h3>
                         <h3>
                           {phone2 && <a href={`tel:${phone2}`}>{phone2}</a>}
-                        </h3>
+                        </h3> */}
                       </div>
                     </div>
-                    <div className="contact-info-items">
+                    {/* <div className="contact-info-items">
                       <div className="icon">
                         <FaEnvelope size={25} color="#fff" />
-                      </div>
-                      <div className="content">
+                      </div> */}
+                      {/* <div className="content">
                         <p>Envoyez-nous un email</p>
                         <h3>
                           {email1 && <a href={`mailto:${email1}`}>{email1}</a>}
@@ -85,8 +85,8 @@ export default function Contact() {
                         <h3>
                           {email2 && <a href={`mailto:${email2}`}>{email2}</a>}
                         </h3>
-                      </div>
-                    </div>
+                      </div> */}
+                    {/* </div> */}
                     <div className="contact-info-items border-none">
                       <div className="icon">
                         <FaLocationDot size={25} color="#fff" />

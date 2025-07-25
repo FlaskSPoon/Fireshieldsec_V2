@@ -1,43 +1,72 @@
+
+"use client"
+
 import SeoMeta from "@/components/common/SeoMeta";
 import Cta from "@/components/footers/Cta";
-import { conseils, gouvernance } from "@/data/conseilAudit";
-import { audits } from "@/data/servicesG";
-import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import {detection, proteger, reponse, strategie} from "@/data/strategie";
+import ServiceCard from "@/components/card/ServiceCard";
+import { detecter, proteger, reponse, strategie } from "@/data/servicesG";
+import { apiClient } from "@/components/utils";
+import { useQuery } from "@tanstack/react-query";
 
-export const metadata = {
-  title: "Stratégie, Cybersécurité et Consulting| Fireshield Security",
-  description:
-    "Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection"
-};
 
 export default function Strategie() {
 
+  const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
+    
+      // Récupérer TOUS les services
+      const {
+        data: allServices = [],
+        isLoading,
+        error
+      } = useQuery({
+        queryKey: ['all-services'],
+        queryFn: () => apiClient.getAll('/services'),
+        enabled: true,
+      });
+    
+      
+      // console.log("Tous les services:", allServices);
+      if (isLoading) {
+        return <div>Chargement...</div>;
+      }
+    const getImageByServiceId = (array, id) => {
+      const found = array.find(img => img.id === id);
+      return found?.bgImage;
+    };
+      
+      const strategieService = allServices.filter(service => service.category?.id === 6);
+      const protegerServices = allServices.filter(service => service.category?.id === 7);
+       const detecterServices = allServices.filter(service => service.category?.id === 8);
+        const reponseServices = allServices.filter(service => service.category?.id === 9);
+     
+      const truncateText = (text, maxLength) => {
+        if (text.length > maxLength) {
+          return text.substring(0, maxLength) + '...';
+        }
+        return text;
+      };
+
   return (
     <>
-      <SeoMeta title={metadata.title} />
+      <SeoMeta title="Conseil, Audit et Gouvernance du SI | Fireshield Security" />
+      <SeoMeta description="Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection" />
+
       <main className="main position-relative" id="mains">
         <div className="breadcrumb-wrapper">
           <div
             className="breadcumb"
-            data-bg-src=""
             style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
           >
             <div className="container">
               <div className="page-heading">
                 <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                Stratégie, Cybersécurité et Consulting
+                  Stratégie, Cybersécurité et Consulting
                 </h1>
-                <ul
-                  className="breadcrumb-items wow fadeInUp"
-                  data-wow-delay=".5s"
-                >
+                <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                   <li>
                     <Link scroll={false} href={`/`}>
-                      {" "}
-                      Accueil{" "}
+                      Accueil
                     </Link>
                   </li>
                   <li>
@@ -50,57 +79,30 @@ export default function Strategie() {
           </div>
         </div>
 
-        <div className="text-center w-[200px] p-2 "> {/* avant dernierre div*/}
+        <div className="text-center w-[200px] p-2">
           <section>
+            {/* Section Audit - Catégorie ID 2 */}
             <div className="mt-50">
-              <h2> STRATÉGIE DE SÉCURITÉ</h2>
+              <h2>STRATÉGIE DE SÉCURITÉ</h2>
               <div className="container">
                 <div className="row">
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
                       <figure className="px-1 pt-1"></figure>
-
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {strategie.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
-                            <div className="service-icon">
-                              <Image
-                                src={service.icon}
-                                width={100}
-                                height={20}
-                                alt="icon"
-                              />
-                            </div>
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text">{service.description}</p>
-                            <p className="text text-danger">
-                              {service.details}
-                            </p>
-                            <p className="text text-danger">
-                              {" "}
-                              {service.detailsplus}
-                            </p>
-
-                            <div className="btn-wrapper">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
+                        {strategieService.slice(0,300).map((service, index) => (
+                          <ServiceCard
+                            key={`strategie-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                           image={strategie[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
+                            link={`/services/${service.id}`}
+                          
+                          />
                         ))}
+
                       </div>
                     </div>
                   </div>
@@ -108,55 +110,32 @@ export default function Strategie() {
               </div>
             </div>
 
+            {/* Section Conseil - Catégorie ID 3 */}
             <div className="mt-50">
               <h2>DÉTECTION</h2>
               <div className="container">
                 <div className="row">
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
-                      <figure className="px-1 pt-1"></figure>
-
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {detection.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
-                            <div className="service-icon">
-                              <Image
-                                src={service.icon}
-                                width={100}
-                                height={20}
-                                alt="icon"
-                              />
-                            </div>
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text">{service.description}</p>
-                            <p className="text text-danger">
-                              {service.details}
-                            </p>
-                            <p className="text text-danger">
-                              {" "}
-                              {service.detailsplus}
-                            </p>
+                        {detecterServices.slice(0,300).map((service, index) => (
+                          <ServiceCard
+                            key={`detecter-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                            image={
+                              service.image
+                                ? `${baseURL}/uploads/services/${service.image}`
+                                : detecter[index]?.bgImage || '/assets/img/icon/internet-security.png'
+                            }
+                            
 
-                            <div className="btn-wrapper">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
+                            link={`/services/${service.id}`}
+                          />
                         ))}
+                        
                       </div>
                     </div>
                   </div>
@@ -164,108 +143,74 @@ export default function Strategie() {
               </div>
             </div>
 
-
-
+            {/* Section Gouvernance - Catégorie ID 4 */}
             <div className="mt-50">
-              <h2>RÉPONSE</h2>
               <div className="container">
                 <div className="row">
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
-                      <figure className="px-1 pt-1"></figure>
-
+                      <h2 className="p-4 text-dark">RÉPONSE</h2>
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {reponse.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
-                            <div className="service-icon">
-                              <Image
-                                src={service.icon}
-                                width={100}
-                                height={20}
-                                alt="icon"
-                              />
-                            </div>
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text-container">
-                              {service.description}
-                            </p>
-                            <div className="btn-wrapper p-2">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                        {reponseServices.map((service, index) => (
+                          <ServiceCard
+                            key={`reponse-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                            image={
+                              service.image
+                                ? `${baseURL}/uploads/services/${service.image}`
+                                : reponse[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
+                            }
+                           
+                            link={`/services/${service.id}`}
+                          />
 
-              <div className="mt-50">
-                <div className="container">
-                  <div className="row">
-                    <div className="">
-                      <div className="bg-base-100 w-96 shadow-sm">
-                        <figure className="px-1 pt-1"></figure>
-                        <h2 className=" p-4 text-dark">PROTÉGER</h2>
-                        <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                          {proteger.map((service, index) => (
-                            <div
-                              className="service-card style4 wow fadeInUp"
-                              data-wow-delay={service.delay}
-                              key={index}
-                            >
-                              <div className="service-icon">
-                                <Image
-                                  src={service.icon}
-                                  width={100}
-                                  height={20}
-                                  alt="icon"
-                                />
-                              </div>
-                              <h3 className="service-title">
-                                <Link scroll={false} href={`/service-1`}>
-                                  {service.title}
-                                </Link>
-                              </h3>
-                              <p className="text-container">
-                                {service.description}
-                              </p>
-                              <div className="btn-wrapper p-2">
-                                <Link
-                                  scroll={false}
-                                  className="link-btn"
-                                  href={`/service-details/${service.id}`}
-                                >
-                                  En savoir plus{" "}
-                                  <i className="fa-sharp fa-light fa-arrow-right-long" />
-                                </Link>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        ))}
+
+                        
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            
             </div>
-            
+
+
+               {/* Section Gouvernance - Catégorie ID 4 */}
+            <div className="mt-50">
+              <div className="container">
+                <div className="row">
+                  <div className="">
+                    <div className="bg-base-100 w-96 shadow-sm">
+                      <h2 className="p-4 text-dark">PROTÉGER</h2>
+                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                        {protegerServices.map((service, index) => (
+                          <ServiceCard
+                            key={`proteger-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                            image={
+                              service.image
+                                ? `${baseURL}/uploads/services/${service.image}`
+                                : proteger[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
+                            }
+                           
+                            link={`/services/${service.id}`}
+                          />
+
+                        ))}
+
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
 

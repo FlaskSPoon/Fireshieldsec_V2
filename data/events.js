@@ -126,4 +126,50 @@ export const certificationItems = [
   }
 ];
 
+
+
+export const about=[
+    {id:1,
+      bgImage: "/assets/img/blog/blogCardThumb1_4.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/blog/blogCardThumb1_5.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:4,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+
+    {
+      id:5,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:6,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:7,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },{
+      id:8,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    }
+    , 
+    {
+      id:9,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:10,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    }
+  
+  ]
+
 export const allEvents = [...events, ...certificationItems];

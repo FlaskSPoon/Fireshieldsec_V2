@@ -3,6 +3,7 @@ import Cta from "@/components/footers/Cta";
 import BlogDetails from "@/components/pages/blog/BlogDetails";
 import Link from "next/link";
 import { allBlogs } from "@/data/blogs";
+import BlogDetailsPage from "./[id]/page";
 
 export const metadata = {
   title: "Blog | Fireshield Security",
@@ -46,7 +47,7 @@ export default function Page({ params }) {
             </div>
           </div>
         </div>
-        <BlogDetails blogItem={blogItem} />
+         <BlogDetails blogItem={blogItem} />
         <Cta />
       </main>
     </>

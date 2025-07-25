@@ -51,6 +51,11 @@ export default function Partenaire(){
             id: 9,
            
             logo: '/assets/img/partenaire/logoPecb.png',
+        },
+        {
+            id: 9,
+           
+            logo: '/assets/img/partenaire/tenable.png',
         },];
 
       
@@ -66,8 +71,8 @@ export default function Partenaire(){
                                         <Card.Img 
                                             variant="top" 
                                             src={partenaire.logo} 
-                                            alt={partenaire.nom} 
-                                            style={{ width: "100px", height: "100px", objectFit: "contain" }} 
+                                         
+                                            // style={{ width: "100px", height: "100px", objectFit: "contain" }} 
                                         />
                                     </div>
                                 </div>

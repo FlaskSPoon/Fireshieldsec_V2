@@ -1,13 +1,27 @@
 "use client";
+
 import { metadata } from "@/app/not-found";
 import SeoMeta from "@/components/common/SeoMeta";
-import { sensibilisation } from "@/data/formation";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react"; // Importez useEffect
+import React, { useState, useEffect } from "react";
 import Cta from "@/components/footers/Cta";
-export default function Sensibilsations() {
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/components/utils";
+import { sensibilisation } from "@/data/servicesG";
+import ServiceCard from "@/components/card/ServiceCard";
 
+export default function Sensibilsations() {
+  const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
+
+  const {
+    data: allServices = [],
+    isLoading,
+    error
+  } = useQuery({
+    queryKey: ['all-services'],
+    queryFn: () => apiClient.getAll('/services'),
+  });
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -19,83 +33,66 @@ export default function Sensibilsations() {
     "/assets/img/hero/confident1.png",
   ];
 
-  // Fonction pour passer à l'image suivante
   const nextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  // Fonction pour passer à l'image précédente
   const prevSlide = () => {
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
-  // Défilement automatique avec useEffect
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide(); // Change d'image toutes les 5 secondes
-    }, 5000);
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-    return () => clearInterval(interval); // Nettoyage de l'intervalle
-  }, [activeIndex]); // Redémarre l'intervalle si activeIndex change
+  const sensibilisationServices = allServices.filter(service => service.category?.id === 10);
 
-  return typeof window !== "undefined" && (
+  const truncateText = (text, maxLength) =>
+    text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+
+  return (
     <>
-
-<SeoMeta title={metadata.title} />
-<div className="breadcrumb-wrapper">
-          <div
-            className="breadcumb"
-            data-bg-src=""
-            style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
-          >
-            <div className="container">
-              <div className="page-heading">
-                <h1 className="wow fadeInUp" data-wow-delay=".3s">
-               Sensibilisation En Cybersécurité
-                </h1>
-                <ul
-                  className="breadcrumb-items wow fadeInUp"
-                  data-wow-delay=".5s"
-                >
-                  <li>
-                    <Link scroll={false} href={`/`}>
-                      {" "}
-                      Accueil{" "}
-                    </Link>
-                  </li>
-                  <li>
-                    <i className="fas fa-chevrons-right" />
-                  </li>
-                  <li>Service</li>
-                </ul>
-              </div>
+       <SeoMeta title="Conseil, Audit et Gouvernance du SI | Fireshield Security" />
+      <SeoMeta description="Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection" />
+      <div className="breadcrumb-wrapper">
+        <div
+          className="breadcumb"
+          style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
+        >
+          <div className="container">
+            <div className="page-heading">
+              <h1>Sensibilisation En Cybersécurité</h1>
+              <ul className="breadcrumb-items">
+                <li><Link scroll={false} href={`/`}>Accueil</Link></li>
+                <li><i className="fas fa-chevrons-right" /></li>
+                <li>Service</li>
+              </ul>
             </div>
           </div>
         </div>
+      </div>
+
       <div className="container p-2">
         <div className="row d-flex align-items-center">
-          {/* Première carte */}
           <div className="col-md-6">
             <div className="p-3">
-              <h3 className="bg-dark text-white text-center">
-                Formations et Sensibilisation
-              </h3>
-              <p className="">
-                Notre programme de formation complet est conçu pour permettre à
-                votre équipe d'acquérir les connaissances et les compétences
-                nécessaires pour identifier, prévenir, et répondre efficacement
-                aux cybermenaces. Grâce à des sessions interactives et
-                engageantes, nous visons à favoriser une culture de la sécurité au
-                sein de votre organisation, transformant vos employés de
-                vulnérabilités potentielles en votre ligne de défense la plus
-                forte.
-              </p>
+              <h3 className="bg-dark text-white text-center">Formations et Sensibilisation</h3>
+              <p>Notre programme de formation complet est conçu pour permettre à votre équipe
+                 d'acquérir les connaissances et les compétences nécessaires pour identifier, 
+                 prévenir, et répondre efficacement aux cybermenaces. Grâce à des sessions 
+                 interactives et engageantes, nous visons à favoriser une culture de la sécurité 
+                 au sein de votre organisation, transformant vos employés de vulnérabilités
+                  potentielles en votre ligne de défense la plus forte.</p>
             </div>
           </div>
 
-          {/* Deuxième carte avec le carrousel */}
           <div className="col-md-6">
             <div className="p-3">
               <div className="carousel slide">
@@ -115,76 +112,51 @@ export default function Sensibilsations() {
                     </div>
                   ))}
                 </div>
-
-                {/* Boutons de navigation */}
-                <button
-                  className="carousel-control-prev"
-                  type="button"
-                  onClick={prevSlide}
-                >
+                <button className="carousel-control-prev" onClick={prevSlide}>
                   <span className="carousel-control-prev-icon" />
                 </button>
-                <button
-                  className="carousel-control-next"
-                  type="button"
-                  onClick={nextSlide}
-                >
+                <button className="carousel-control-next" onClick={nextSlide}>
                   <span className="carousel-control-next-icon" />
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <Sensibilisation />
-      </div>
-    </>
-  );
- 
-}
 
-export function Sensibilisation() {
-  return (
-    
-    <>
-    <SeoMeta title={metadata.title}s />
-      <div className="p-2 text-center  pb-425">
-        <h3 className="">SENSIBILISATION</h3>
-        <div className="container pb-425">
-          <div className="service-card-wrapper style2 p-4">
-            {sensibilisation.map((service, index) => (
-              <div
-                className="service-card style2 wow fadeInUp"
-                data-wow-delay={service.delay}
-                key={index}
-              >
-                <div className="service-thumb " ></div>
-                <div className="service-content">
-                  <h3 className="service-content_title ">
-                    <Link scroll={false} href={`/audit/${service.id}`}>
-                      {service.title}
-                    </Link>
-
-                  </h3>
-                  <p className="text-container">{service.description}</p>
-                  <Link
-                    scroll={false}
-                    className="link"
-                    href={`/service-details/${service.id}`}
-                  >
-                    Plus de détails
-                    <i className="fa-sharp fa-light fa-arrow-right-long" />
-                  </Link>
+        <div className="text-center w-[200px] p-2">
+          <section>
+            <div className="mt-50">
+              <h2>SENSIBILISATION</h2>
+              <div className="container">
+                <div className="row">
+                  <div className="bg-base-100 w-96 shadow-sm">
+                    <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                      {sensibilisationServices.slice(0, 300).map((service, index) => (
+                        <ServiceCard
+                          key={`sensibilisation-${service.id}`}
+                          serviceId={service.id}
+                          title={truncateText(service.name, 30)}
+                          content={truncateText(service.description, 100)}
+                          category={service.category?.name}
+                          image={
+                            service.image
+                              ? `${baseURL}/uploads/services/${service.image}`
+                              : sensibilisation[index]?.bgImage || '/assets/img/icon/internet-security.png'
+                          }
+                          link={`/services/${service.id}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </section>
         </div>
+
+        <div className="pb-300" />
+        <Cta />
       </div>
-      <div>
-      
-      </div>
-      <Cta  
-      />
     </>
   );
 }

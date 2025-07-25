@@ -30,7 +30,239 @@ export const servicesG = [
       delay: "1s"
     }
   ];
-  export const audits = [
+  export const audit=[
+    {
+      id:1,
+      bgImage: "/assets/img/icon/internet-security.png",
+    },
+    {id:2,
+      bgImage: "/assets/img/icon/padlock_3055803.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/wcuIcon1_3.png",
+    }
+  ];
+
+  export const conseil=[
+    {
+      id:1,
+      bgImage: "/assets/img/icon/Relume-1.png",
+    },
+    {id:2,
+      bgImage: "/assets/img/icon/unlock_11.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/shield_17658695.png",
+    },
+     {
+    id:4,
+      bgImage: "/assets/img/icon/shield_17658695.png",
+    }
+  ];
+
+
+export const gouvernance=[
+    
+      
+    
+    {id:1,
+      bgImage: "/assets/img/icon/padlock_3055803.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/icon/padlock.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/access-control_9767318.png",
+    }
+  ]
+
+
+  export const info=[
+    {
+      id:1,
+      bgImage: "/assets/img/icon/internet-security.png",
+    },
+    {id:2,
+      bgImage: "/assets/img/icon/padlock_3055803.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/wcuIcon1_3.png",
+    }
+  ];
+
+
+export const support=[
+    
+      
+    
+    {id:1,
+      bgImage: "/assets/img/icon/padlock_3055803.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/icon/padlock.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/access-control_9767318.png",
+    }
+  ]
+
+
+
+  export const strategie=[
+    
+      
+    
+    {id:1,
+      bgImage: "/assets/img/icon/padlock_3055803.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/hero/secure-data.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/access-control_9767318.png",
+    }
+  ]
+
+
+  export const proteger=[
+    
+    {id:1,
+      bgImage: "/assets/img/hero/security_7.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/icon/padlock.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/access-control_9767318.png",
+    }
+  ]
+  
+export const detecter=[
+    
+    {id:1,
+      bgImage: "/assets/img/hero/trust.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/icon/padlock.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/access-control_9767318.png",
+    }
+  ]
+
+  export const sensibilisation=[
+    
+    {id:1,
+      bgImage: "/assets/img/hero/trust.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/hero/heroThumb3_2.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/safe_16.png",
+    }
+  ]
+
+  export const formation=[
+    
+    {id:1,
+      bgImage: "/assets/img/about/thumb4.jpg",
+      width:600,
+      height:300,
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/about/t4.jpg",
+      width:600,
+      height:300,
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/about/t2.jpg",
+      width:600,
+      height:300,
+    }
+  ]
+
+  export const reponse=[
+    {id:1,
+      bgImage: "/assets/img/icon/padlock_3055803.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/icon/padlock.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/icon/access-control_9767318.png",
+    }
+  ]
+
+export const about=[
+    {id:1,
+      bgImage: "/assets/img/blog/blogCardThumb1_4.png",
+    },
+    {
+      id:2,
+      bgImage: "/assets/img/blog/blogCardThumb1_5.png",
+    },
+    {
+      id:3,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:4,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:5,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:6,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:7,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    {
+      id:8,
+      bgImage: "/assets/img/about/cleanup.png",
+    },
+    {
+      id:9,
+      bgImage: "/assets/img/about/aboutThumb3_2.png",
+    },
+    {
+      id:10,
+      bgImage: "/assets/img/about/aboutThumb1_2.png",
+    },
+    {
+      id:11,
+      bgImage: "/assets/img/blog/blogCardThumb1_6.png",
+    },
+    
+  ]
+
+
+
+  export const audits =[
     {
       id: 1,
       icon: "/assets/img/icon/serviceIcon1_1.png",
@@ -63,3 +295,4 @@ export const servicesG = [
     
   ];
   
+

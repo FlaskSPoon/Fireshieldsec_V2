@@ -1,26 +1,57 @@
-import SeoMeta from "@/components/common/SeoMeta";
-import Cta from "@/components/footers/Cta";
-import { conseils, gouvernance } from "@/data/conseilAudit";
-import { audits } from "@/data/servicesG";
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
 
-export const metadata = {
-  title: "Conseil, Audit et Gouvernance du SI | Fireshield Security",
-  description:
-    "Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection"
-};
+
+"use client"
+import Cta from "@/components/footers/Cta";
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/components/utils";
+import SeoMeta from "@/components/common/SeoMeta";
+import ServiceCard from "@/components/card/ServiceCard";
+import Link from "next/link";
+import { audit, conseil, gouvernance } from "@/data/servicesG";
 
 export default function Audit() {
+  const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
+
+  // Récupérer TOUS les services
+  const {
+    data: allServices = [],
+    isLoading,
+    error
+  } = useQuery({
+    queryKey: ['all-services'],
+    queryFn: () => apiClient.getAll('/services'),
+    enabled: true,
+  });
+
+  
+  // console.log("Tous les services:", allServices);
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+const getImageByServiceId = (array, id) => {
+  const found = array.find(img => img.id === id);
+  return found?.bgImage;
+};
+  
+  const auditServices = allServices.filter(service => service.category?.id === 1);
+  const conseilServices = allServices.filter(service => service.category?.id === 2);
+  const gouvernanceServices = allServices.filter(service => service.category?.id === 3);
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  };
+
   return (
     <>
-      <SeoMeta title={metadata.title} />
+      <SeoMeta title="Conseil, Audit et Gouvernance du SI | Fireshield Security" />
+      <SeoMeta description="Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection" />
+
       <main className="main position-relative" id="mains">
         <div className="breadcrumb-wrapper">
           <div
             className="breadcumb"
-            data-bg-src=""
             style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
           >
             <div className="container">
@@ -28,14 +59,10 @@ export default function Audit() {
                 <h1 className="wow fadeInUp" data-wow-delay=".3s">
                   Conseil, Audit et Gouvernance du Système d'Information
                 </h1>
-                <ul
-                  className="breadcrumb-items wow fadeInUp"
-                  data-wow-delay=".5s"
-                >
+                <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                   <li>
                     <Link scroll={false} href={`/`}>
-                      {" "}
-                      Accueil{" "}
+                      Accueil
                     </Link>
                   </li>
                   <li>
@@ -48,8 +75,9 @@ export default function Audit() {
           </div>
         </div>
 
-        <div className="text-center w-[200px] p-2 ">
+        <div className="text-center w-[200px] p-2">
           <section>
+            {/* Section Audit - Catégorie ID 2 */}
             <div className="mt-50">
               <h2>AUDIT DE SÉCURITÉ</h2>
               <div className="container">
@@ -57,145 +85,87 @@ export default function Audit() {
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
                       <figure className="px-1 pt-1"></figure>
-
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {audits.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
-                            <div className="service-icon">
-                              <Image
-                                src={service.icon}
-                                width={100}
-                                height={20}
-                                alt="icon"
-                              />
-                            </div>
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text">{service.description}</p>
-                            <p className="text text-danger">
-                              {service.details}
-                            </p>
-                            <p className="text text-danger">
-                              {" "}
-                              {service.detailsplus}
-                            </p>
-
-                            <div className="btn-wrapper">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
+                        {auditServices.slice(0,300).map((service, index) => (
+                          <ServiceCard
+                            key={`audit-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                           image={audit[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
+                            link={`/audit/${service.id}`}
+                          
+                          />
                         ))}
+
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Section Conseil - Catégorie ID 3 */}
             <div className="mt-50">
               <h2>CONSEILS</h2>
               <div className="container">
                 <div className="row">
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
-                      <figure className="px-1 pt-1"></figure>
-
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {conseils.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
-                            <div className="service-icon">
-                              <Image
-                                src={service.icon}
-                                width={100}
-                                height={20}
-                                alt="icon"
-                              />
-                            </div>
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text-container">
-                              {service.description}
-                            </p>
-                            <div className="btn-wrapper p-2">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
+                        {conseilServices.slice(0,3).map((service, index) => (
+                          <ServiceCard
+                            key={`conseil-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                            image={
+                              service.image
+                                ? `${baseURL}/uploads/services/${service.image}`
+                                : conseil[index]?.bgImage || '/assets/img/icon/internet-security.png'
+                            }
+                            
+
+                            link={`/audit/${service.id}`}
+                          />
                         ))}
+                        
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="mt-50">
-                <div className="container">
-                  <div className="row">
-                    <div className="">
-                      <div className="bg-base-100 w-96 shadow-sm">
-                        <figure className="px-1 pt-1"></figure>
-                        <h2 className=" p-4 text-dark">GOUVERNANCE</h2>
-                        <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                          {gouvernance.map((service, index) => (
-                            <div
-                              className="service-card style4 wow fadeInUp"
-                              data-wow-delay={service.delay}
-                              key={index}
-                            >
-                              <div className="service-icon">
-                                <Image
-                                  src={service.icon}
-                                  width={100}
-                                  height={20}
-                                  alt="icon"
-                                />
-                              </div>
-                              <h3 className="service-title">
-                                <Link scroll={false} href={`/service-1`}>
-                                  {service.title}
-                                </Link>
-                              </h3>
-                              <p className="text-container">
-                                {service.description}
-                              </p>
-                              <div className="btn-wrapper p-2">
-                                <Link
-                                  scroll={false}
-                                  className="link-btn"
-                                  href={`/service-details/${service.id}`}
-                                >
-                                  En savoir plus{" "}
-                                  <i className="fa-sharp fa-light fa-arrow-right-long" />
-                                </Link>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+            </div>
+
+            {/* Section Gouvernance - Catégorie ID 4 */}
+            <div className="mt-50">
+              <div className="container">
+                <div className="row">
+                  <div className="">
+                    <div className="bg-base-100 w-96 shadow-sm">
+                      <h2 className="p-4 text-dark">GOUVERNANCE</h2>
+                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                        {gouvernanceServices.map((service, index) => (
+                          <ServiceCard
+                            key={`gouv-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                            image={
+                              service.image
+                                ? `${baseURL}/uploads/services/${service.image}`
+                                : gouvernance[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
+                            }
+                           
+                            link={`/audit/${service.id}`}
+                          />
+
+                        ))}
+
+                        
                       </div>
                     </div>
                   </div>

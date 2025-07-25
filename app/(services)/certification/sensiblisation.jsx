@@ -59,7 +59,7 @@ export function Specialisation() {
                 <div className="row">
                   <div className="bg-base-100 w-96 shadow-sm">
                     <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                      {formationServices.slice(0, 3).map((service, index) => (
+                      {formationServices.slice(0, 300).map((service, index) => (
                         <ServiceCard
                           key={`formation-${service.id}`}
                           serviceId={service.id}

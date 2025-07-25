@@ -11,6 +11,15 @@ const apiClient = {
       throw error;
     }
   },
+  getOne: async (endpoint, id) => {
+    try {
+      const response = await axios.get(`${baseURL}${endpoint}/${id}`);
+      return response;
+    } catch (error) {
+      console.error(`Erreur lors de l'appel à ${endpoint}:`, error);
+      throw error;
+    }
+  },
 
   getById: async (endpoint, id) => {
     const controller = new AbortController();

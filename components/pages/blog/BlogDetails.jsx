@@ -5,7 +5,11 @@ import CommentForm from "./CommentForm";
 import Image from "next/image";
 import { FaCircleUser, FaComment, FaComments, FaTag } from "react-icons/fa6";
 
+
+
 export default function BlogDetails({ blogItem }) {
+
+
   return (
     <section className="news-standard fix space-top pb-425">
       <div className="container">
@@ -156,18 +160,10 @@ export default function BlogDetails({ blogItem }) {
                   >
                     <div className="social-share">
                       <span className="me-3">Partager :</span>
-                      <a href="#">
-                        <i className="fab fa-facebook-f" />
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-twitter" />
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-linkedin-in" />
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-youtube" />
-                      </a>
+                      <a href="https://www.facebook.com/Fireshieldsec/"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://x.com/FireshieldSN/"><i className="fab fa-twitter" /></a>
+                      <a href="https://www.linkedin.com/company/fireshieldsecurity"><i className="fab fa-linkedin-in" /></a>
+                      <a href="#"><i className="fab fa-youtube" /></a>
                     </div>
                   </div>
                 </div>

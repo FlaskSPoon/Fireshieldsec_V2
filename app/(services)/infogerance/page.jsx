@@ -1,41 +1,71 @@
+
+"use client"
+
 import SeoMeta from "@/components/common/SeoMeta";
 import Cta from "@/components/footers/Cta";
-import { infogerance, support_si } from '@/data/infogerance';
-import { audits } from "@/data/servicesG";
-import Image from "next/image";
+import { info, support } from "@/data/servicesG";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import ServiceCard from "@/components/card/ServiceCard";
+import { apiClient } from "@/components/utils";
 
-export const metadata = {
-  title: "Infogérance et Support SI| Fireshield Security",
-  description:
-    "Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection"
-};
 
-export default function Infogerance ()  {
+
+export default function Infogerance() {
+
+  const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
+  
+    // Récupérer TOUS les services
+    const {
+      data: allServices = [],
+      isLoading,
+      error
+    } = useQuery({
+      queryKey: ['all-services'],
+      queryFn: () => apiClient.getAll('/services'),
+      enabled: true,
+    });
+  
+    
+    // console.log("Tous les services:", allServices);
+    if (isLoading) {
+      return <div>Chargement...</div>;
+    }
+  const getImageByServiceId = (array, id) => {
+    const found = array.find(img => img.id === id);
+    return found?.bgImage;
+  };
+    
+    const infoServices = allServices.filter(service => service.category?.id === 4);
+    const supportServices = allServices.filter(service => service.category?.id === 5);
+   
+    const truncateText = (text, maxLength) => {
+      if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+      }
+      return text;
+    };
   return (
-    <>
-      <SeoMeta title={metadata.title} />
+   <>
+      <SeoMeta title="Conseil, Audit et Gouvernance du SI | Fireshield Security" />
+      <SeoMeta description="Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection" />
+
       <main className="main position-relative" id="mains">
         <div className="breadcrumb-wrapper">
           <div
             className="breadcumb"
-            data-bg-src=""
             style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
           >
             <div className="container">
               <div className="page-heading">
                 <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                Infogérance et Support SI
+                 Infogérance et Support SI
                 </h1>
-                <ul
-                  className="breadcrumb-items wow fadeInUp"
-                  data-wow-delay=".5s"
-                >
+                <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                   <li>
                     <Link scroll={false} href={`/`}>
-                      {" "}
-                      Accueil{" "}
+                      Accueil
                     </Link>
                   </li>
                   <li>
@@ -47,184 +77,72 @@ export default function Infogerance ()  {
             </div>
           </div>
         </div>
-        <div className="text-center w-[200px] p-2 ">
+
+        <div className="text-center w-[200px] p-2">
           <section>
-            
-          </section>
-        </div>
-//
-        <div className="text-center w-[200px] p-2 ">
-          <section>
+            {/* Section Audit - Catégorie ID 2 */}
             <div className="mt-50">
-              <div><h5 className="subtitle text-start">
-                                          <span>
-                                            <Image
-                                              alt="icon"
-                                              src="/assets/img/icon/titleIcon.png"
-                                              width="28"
-                                              height="12"
-                                            />
-                                          </span>{" "}
-                                          Fireshield Security prend en charge la
-              gestion complète ou partielle de votre
-              système d'information, vous permettant
-              ainsi de vous concentrer sur votre cœur
-              de métier.{" "}
-                                          <span>
-                                            <Image
-                                              alt="icon"
-                                              src="/assets/img/icon/titleIcon.png"
-                                              width="28"
-                                              height="12"
-                                            />
-                                          </span>
-                                        </h5></div>
-              <h2 className="bg-danger text-white p-2 card">INFOGÉRANCE</h2>
-              <p className="text-dark">
-              Fireshield Security prend en charge la gestion complète ou partielle de votre SI.
-            </p>
+              <h2>INFOGÉRANCE</h2>
               <div className="container">
                 <div className="row">
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
                       <figure className="px-1 pt-1"></figure>
-
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {infogerance.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
+                        {infoServices.slice(0,300).map((service, index) => (
+                          <ServiceCard
+                            key={`info-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                           image={info[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
+                            link={`/services/${service.id}`}
+                          
+                          />
+                        ))}
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section Conseil - Catégorie ID 3 */}
+            <div className="mt-50">
+              <h2>SUPPORT SI</h2>
+              <div className="container">
+                <div className="row">
+                  <div className="">
+                    <div className="bg-base-100 w-96 shadow-sm">
+                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
+                        {supportServices.slice(0,3).map((service, index) => (
+                          <ServiceCard
+                            key={`support-${service.id}`}
+                            serviceId={service.id}
+                            title={truncateText(service.name, 30)}
+                            content={truncateText(service.description, 100)}
+                            category={service.category?.name}
+                            image={
+                              service.image
+                                ? `${baseURL}/uploads/services/${service.image}`
+                                : support[index]?.bgImage || '/assets/img/icon/internet-security.png'
+                            }
                             
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text">{service.description}</p>
-                            <p className="text text-danger">
-                              {service.details}
-                            </p>
-                            <p className="text text-danger">
-                              {" "}
-                              {service.detailsplus}
-                            </p>
 
-                            <div className="btn-wrapper">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
+                            link={`/services/${service.id}`}
+                          />
                         ))}
+                        
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="mt-50">
-              <h2 className="bg-danger text-white p-2 card">SUPPORT SI</h2>
-              <p className="text-dark">
-                  Nous proposons une gamme complète de services de support des
-                  systèmes
-                  <br />
-                  d'information pour garantir la disponibilité et la performance
-                  de vos infrastructures.
-                </p>
-              <div className="container">
-                <div className="row">
-                  <div className="">
-                    <div className="bg-base-100 w-96 shadow-sm">
-                      <figure className="px-1 pt-1"></figure>
 
-                      <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {support_si.map((service, index) => (
-                          <div
-                            className="service-card style4 wow fadeInUp"
-                            data-wow-delay={service.delay}
-                            key={index}
-                          >
-                            <h3 className="service-title">
-                              <Link scroll={false} href={`/service-1`}>
-                                {service.title}
-                              </Link>
-                            </h3>
-                            <p className="text-container">
-                              {service.description}
-                            </p>
-                            <div className="btn-wrapper p-2">
-                              <Link
-                                scroll={false}
-                                className="link-btn"
-                                href={`/service-details/${service.id}`}
-                              >
-                                En savoir plus{" "}
-                                <i className="fa-sharp fa-light fa-arrow-right-long" />
-                              </Link>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-50">
-                <div className="container">
-                  <div className="row">
-                    <div className="">
-                     {/* <div className="bg-base-100 w-96 shadow-sm">
-                        <figure className="px-1 pt-1"></figure>
-                        <h2 className=" p-4 text-dark">GOUVERNANCE</h2>
-                        <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                          {gouvernance.map((service, index) => (
-                            <div
-                              className="service-card style4 wow fadeInUp"
-                              data-wow-delay={service.delay}
-                              key={index}
-                            >
-                              <div className="service-icon">
-                                <Image
-                                  src={service.icon}
-                                  width={100}
-                                  height={20}
-                                  alt="icon"
-                                />
-                              </div>
-                              <h3 className="service-title">
-                                <Link scroll={false} href={`/service-1`}>
-                                  {service.title}
-                                </Link>
-                              </h3>
-                              <p className="text-container">
-                                {service.description}
-                              </p>
-                              <div className="btn-wrapper p-2">
-                                <Link
-                                  scroll={false}
-                                  className="link-btn"
-                                  href={`/service-details/${service.id}`}
-                                >
-                                  En savoir plus{" "}
-                                  <i className="fa-sharp fa-light fa-arrow-right-long" />
-                                </Link>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>*/}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
           </section>
         </div>
 

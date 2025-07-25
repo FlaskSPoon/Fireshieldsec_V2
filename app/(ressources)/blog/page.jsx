@@ -8,6 +8,8 @@ export const metadata = {
     "Cybersécurité, Gestion des systèmes d'information (SI), Conseil, Protection et Détection"
 };
 export default function Page() {
+
+  
   return (
     <>
       <SeoMeta title={metadata.title} />

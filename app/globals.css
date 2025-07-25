@@ -41,10 +41,6 @@ a {
     color-scheme: dark;
   }
 }
-<<<<<<< HEAD
-
-
-=======
 /* Animation pour la main */
 @keyframes point {
   0% {
@@ -74,4 +70,24 @@ a {
   min-height: 600px;
   background: blueviolet;
 }
->>>>>>> 76ac14aeb8934a3d24f34cc9673eacb586522165
+/* Animation fade-in personnalisée */
+.animate-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Délais d'animation progressifs */
+.animate-fade-in:nth-child(1) { animation-delay: 0.1s; }
+.animate-fade-in:nth-child(2) { animation-delay: 0.3s; }
+.animate-fade-in:nth-child(3) { animation-delay: 0.5s; }
+.animate-fade-in:nth-child(4) { animation-delay: 0.7s; }
+.animate-fade-in:nth-child(5) { animation-delay: 0.9s; }
+.animate-fade-in:nth-child(6) { animation-delay: 1.1s; }

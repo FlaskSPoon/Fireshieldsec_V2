@@ -1,3 +1,5 @@
+
+
 import SeoMeta from "@/components/common/SeoMeta";
 import Cta from "@/components/footers/Cta";
 import Blogs2 from "@/components/pages/blog/Blogs2";
@@ -42,9 +44,10 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <Blogs2 />
+        <Blogs2/>
         <Cta />
       </main>
     </>
   );
 }
+

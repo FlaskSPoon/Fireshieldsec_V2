@@ -2,7 +2,7 @@
 
 import "../public/assets/scss/styles.scss";
 import MobileNav from "@/components/headers/MobileNav";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import SiteMenu from "@/components/headers/SiteMenu";
 import ScrollTop from "@/components/common/ScrollTop";
 import CursorFollor from "@/components/common/CursorFollor";
@@ -13,9 +13,11 @@ import Footer from "@/components/footers/Footer";
 import Header from "@/components/headers/Header";
 import HeaderTop from "@/components/headers/HeaderTop";
 import Loading from "./loading";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function RootLayout({ children }) {
   const path = usePathname();
+  const [queryClient] = useState(() => new QueryClient());
 
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle");
@@ -63,26 +65,28 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <SiteMenu />
-        <MobileNav />
-        <PopupSearch />
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <HeaderTop />
-        <Header />
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-        <CursorFollor />
-        <ScrollTop />
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+          <SiteMenu />
+          <MobileNav />
+          <PopupSearch />
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <HeaderTop />
+          <Header />
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+          <CursorFollor />
+          <ScrollTop />
+          <Footer />
+        </QueryClientProvider>
       </body>
     </html>
   );
