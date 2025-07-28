@@ -7,6 +7,7 @@ import Link from "next/link";
 import Cta from "@/components/footers/Cta";
 import { about } from "@/data/servicesG";
 
+
 const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
 
 export async function generateStaticParams() {
@@ -32,8 +33,8 @@ export async function generateStaticParams() {
         console.error("Erreur dans generateStaticParams:", error);
         return [];
     }
+    
 }
-
 export default async function BlogDetailsPage({ params }) {
     const { id } = params;
 
@@ -119,12 +120,12 @@ export default async function BlogDetailsPage({ params }) {
                                                 src={
                                                     localImage || 
                                                     (service.image 
-                                                        ? `${baseURL}/uploads/service/${service.image}`
+                                                        ? `${baseURL}/uploads/services/${service.image}`
                                                         : '/assets/img/blog/fallback.jpg')
                                                 }
                                                 width={922}
                                                 height={816}
-                                                alt={service.name || "Service"}
+                                                alt={service.name || "Services"}
                                                 className="w-full object-cover"
                                             />
                                             <div className="post-content">
@@ -218,7 +219,7 @@ export default async function BlogDetailsPage({ params }) {
             <div className="container py-20 text-center">
                 <h2 className="text-2xl mb-4">Erreur de chargement</h2>
                 <p className="text-red-500 mb-6">{error.message}</p>
-                <Link href="/event" className="btn btn-primary">
+                <Link href="/infogerance" className="btn btn-primary">
                     Retour aux services
                 </Link>
             </div>

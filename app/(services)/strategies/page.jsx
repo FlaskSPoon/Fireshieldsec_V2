@@ -13,39 +13,39 @@ import { useQuery } from "@tanstack/react-query";
 export default function Strategie() {
 
   const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
-    
-      // Récupérer TOUS les services
-      const {
-        data: allServices = [],
-        isLoading,
-        error
-      } = useQuery({
-        queryKey: ['all-services'],
-        queryFn: () => apiClient.getAll('/services'),
-        enabled: true,
-      });
-    
-      
-      // console.log("Tous les services:", allServices);
-      if (isLoading) {
-        return <div>Chargement...</div>;
-      }
-    const getImageByServiceId = (array, id) => {
-      const found = array.find(img => img.id === id);
-      return found?.bgImage;
-    };
-      
-      const strategieService = allServices.filter(service => service.category?.id === 6);
-      const protegerServices = allServices.filter(service => service.category?.id === 7);
-       const detecterServices = allServices.filter(service => service.category?.id === 8);
-        const reponseServices = allServices.filter(service => service.category?.id === 9);
-     
-      const truncateText = (text, maxLength) => {
-        if (text.length > maxLength) {
-          return text.substring(0, maxLength) + '...';
-        }
-        return text;
-      };
+
+  // Récupérer TOUS les services
+  const {
+    data: allServices = [],
+    isLoading,
+    error
+  } = useQuery({
+    queryKey: ['all-services'],
+    queryFn: () => apiClient.getAll('/services'),
+    enabled: true,
+  });
+
+
+  // console.log("Tous les services:", allServices);
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+  const getImageByServiceId = (array, id) => {
+    const found = array.find(img => img.id === id);
+    return found?.bgImage;
+  };
+
+  const strategieService = allServices.filter(service => service.category?.id === 6);
+  const protegerServices = allServices.filter(service => service.category?.id === 7);
+  const detecterServices = allServices.filter(service => service.category?.id === 8);
+  const reponseServices = allServices.filter(service => service.category?.id === 9);
+
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  };
 
   return (
     <>
@@ -90,16 +90,16 @@ export default function Strategie() {
                     <div className="bg-base-100 w-96 shadow-sm">
                       <figure className="px-1 pt-1"></figure>
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {strategieService.slice(0,300).map((service, index) => (
+                        {strategieService.slice(0, 300).map((service, index) => (
                           <ServiceCard
                             key={`strategie-${service.id}`}
                             serviceId={service.id}
                             title={truncateText(service.name, 30)}
                             content={truncateText(service.description, 100)}
                             category={service.category?.name}
-                           image={strategie[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
-                            link={`/services/${service.id}`}
-                          
+                            image={strategie[index]?.bgImage || "/data/servicesG/internet-security.png"}
+                            link={`/strategies/${service.id}`}
+
                           />
                         ))}
 
@@ -118,7 +118,7 @@ export default function Strategie() {
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {detecterServices.slice(0,300).map((service, index) => (
+                        {detecterServices.slice(0, 300).map((service, index) => (
                           <ServiceCard
                             key={`detecter-${service.id}`}
                             serviceId={service.id}
@@ -130,12 +130,11 @@ export default function Strategie() {
                                 ? `${baseURL}/uploads/services/${service.image}`
                                 : detecter[index]?.bgImage || '/assets/img/icon/internet-security.png'
                             }
-                            
 
-                            link={`/services/${service.id}`}
+                            link={`/strategies/${service.id}`}
                           />
                         ))}
-                        
+
                       </div>
                     </div>
                   </div>
@@ -163,13 +162,13 @@ export default function Strategie() {
                                 ? `${baseURL}/uploads/services/${service.image}`
                                 : reponse[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
                             }
-                           
-                            link={`/services/${service.id}`}
+
+                            link={`/strategies/${service.id}`}
                           />
 
                         ))}
 
-                        
+
                       </div>
                     </div>
                   </div>
@@ -178,7 +177,7 @@ export default function Strategie() {
             </div>
 
 
-               {/* Section Gouvernance - Catégorie ID 4 */}
+            {/* Section Gouvernance - Catégorie ID 4 */}
             <div className="mt-50">
               <div className="container">
                 <div className="row">
@@ -198,13 +197,12 @@ export default function Strategie() {
                                 ? `${baseURL}/uploads/services/${service.image}`
                                 : proteger[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
                             }
-                           
-                            link={`/services/${service.id}`}
+                            link={`/strategies/${service.id}`}
                           />
 
                         ))}
 
-                        
+
                       </div>
                     </div>
                   </div>

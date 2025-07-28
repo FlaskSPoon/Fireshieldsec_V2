@@ -97,7 +97,7 @@ export default function Infogerance() {
                             content={truncateText(service.description, 100)}
                             category={service.category?.name}
                            image={info[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
-                            link={`/services/${service.id}`}
+                            link={`/infogerance/${service.id}`}
                           
                           />
                         ))}
@@ -131,7 +131,7 @@ export default function Infogerance() {
                             }
                             
 
-                            link={`/services/${service.id}`}
+                            link={`/infogerance/${service.id}`}
                           />
                         ))}
                         
