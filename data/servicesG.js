@@ -182,20 +182,17 @@ export const detecter=[
     
     {id:1,
       bgImage: "/assets/img/about/thumb4.jpg",
-      width:600,
-      height:300,
+      
     },
     {
       id:2,
       bgImage: "/assets/img/about/t4.jpg",
-      width:600,
-      height:300,
+      
     },
     {
       id:3,
       bgImage: "/assets/img/about/t2.jpg",
-      width:600,
-      height:300,
+     
     }
   ]
 
