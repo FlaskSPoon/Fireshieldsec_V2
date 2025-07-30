@@ -6,36 +6,33 @@ import { FaCircleUser, FaComments, FaTag } from "react-icons/fa6";
 import Link from "next/link";
 import Cta from "@/components/footers/Cta";
 import { about } from "@/data/servicesG";
-
+import { encodeId, decodeId } from '@/app/hashids/hashids';
 const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
 
 export async function generateStaticParams() {
-    try {
-        const res = await fetch(`${baseURL}/services`);
-        if (!res.ok) {
-            console.error(`Erreur API: ${res.status}`);
-            return [];
-        }
-        
-        const response = await res.json();
-        const services = response.data || response;
-        
-        if (!Array.isArray(services)) {
-            console.error("Réponse API invalide:", response);
-            return [];
-        }
-        
-        return services.map(service => ({
-            id: service.id.toString()
-        }));
-    } catch (error) {
-        console.error("Erreur dans generateStaticParams:", error);
-        return [];
-    }
+
+try {
+    const res = await fetch(`${baseURL}/services`);
+    if (!res.ok) return [];
+
+    const response = await res.json();
+    const services = response.data || response;
+
+    return services.map(service => ({
+      id: encodeId(service.id) 
+    }));
+  } catch (error) {
+    console.error("Erreur dans generateStaticParams:", error);
+    return [];
+  }
+
+
+ 
 }
 
-export default async function BlogDetailsPage({ params }) {
-    const { id } = params;
+export default async function BlogDetailsPage(props) {
+const { id: hashedId } = await props.params;
+  const id = decodeId(hashedId);
 
     try {
         const res = await fetch(`${baseURL}/services/${id}`, {
@@ -43,12 +40,12 @@ export default async function BlogDetailsPage({ params }) {
             next: { tags: [`services-${id}`] }
         });
         
-        if (!res.ok) {
+        if (!id) {
             if (res.status === 404) {
                 return (
                     <div className="container py-20 text-center">
                         <h2 className="text-2xl mb-4">services non trouvé</h2>
-                        <Link href="/event" className="btn btn-primary">
+                        <Link href="/infogerance" className="btn btn-primary">
                             Voir tous les services
                         </Link>
                     </div>

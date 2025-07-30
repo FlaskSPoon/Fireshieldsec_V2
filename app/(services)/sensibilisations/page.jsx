@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/components/utils";
 import { sensibilisation } from "@/data/servicesG";
 import ServiceCard from "@/components/card/ServiceCard";
+import { encodeId } from "@/app/hashids/hashids";
 
 export default function Sensibilsations() {
   const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
@@ -143,7 +144,7 @@ export default function Sensibilsations() {
                               ? `${baseURL}/uploads/services/${service.image}`
                               : sensibilisation[index]?.bgImage || '/assets/img/icon/internet-security.png'
                           }
-                          link={`/services/${service.id}`}
+                          link={`/sensibilisations/${encodeId(service.id)}`}
                         />
                       ))}
                     </div>

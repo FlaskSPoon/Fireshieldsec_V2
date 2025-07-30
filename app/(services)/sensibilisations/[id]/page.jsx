@@ -5,41 +5,60 @@ import Sidebar from "@/components/pages/blog/Sidebar";
 import { FaCircleUser, FaComments, FaTag } from "react-icons/fa6";
 import Link from "next/link";
 import Cta from "@/components/footers/Cta";
+import { decodeId, encodeId } from "@/app/hashids/hashids";
 import { about } from "@/data/servicesG";
-import { encodeId,decodeId } from "@/app/hashids/hashids";
 
 
 const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
 
 export async function generateStaticParams() {
-  try {
-      const res = await fetch(`${baseURL}/services`);
-      if (!res.ok) return [];
-  
-      const response = await res.json();
-      const services = response.data || response;
-  
-      return services.map(service => ({
-        id: encodeId(service.id) 
-      }));
+    try {
+        const res = await fetch(`${baseURL}/services`);
+        if (!res.ok) {
+            console.error(`Erreur API: ${res.status}`);
+            return [];
+        }
+
+        const response = await res.json();
+        const services = response.data || response;
+
+        if (!Array.isArray(services)) {
+            console.error("Réponse API invalide:", response);
+            return [];
+        }
+
+        return services.map(service => ({
+            id: encodeId(service.id)
+        }));
     } catch (error) {
-      console.error("Erreur dans generateStaticParams:", error);
-      return [];
+        console.error("Erreur dans generateStaticParams:", error);
+        return [];
     }
-  
-    
+
 }
 export default async function BlogDetailsPage(props) {
-   const { id: hashedId } = await props.params;
-  const id = decodeId(hashedId);
+ 
+  const { id: hashedId } = await props.params;
+   
+    const realId = decodeId(hashedId);
 
+    if (!realId) {
+        return (
+            <div className="container py-20 text-center">
+                <h2 className="text-2xl mb-4">Sensibilisation non trouvé</h2>
+                <Link href="/event" className="btn btn-primary">
+                    Voir tous les sensibilisations
+                </Link>
+            </div>
+        );
+    }
     try {
-        const res = await fetch(`${baseURL}/services/${id}`, {
+        const res = await fetch(`${baseURL}/services/${realId}`, {
             cache: 'no-store',
-            next: { tags: [`services-${id}`] }
+            next: { tags: [`services-${realId}`] }
         });
-        
-        if (!id) {
+
+        if (!realId) {
             if (res.status === 404) {
                 return (
                     <div className="container py-20 text-center">
@@ -55,7 +74,7 @@ export default async function BlogDetailsPage(props) {
 
         const response = await res.json();
         const service = response.data || response;
-        
+
         const getImageByServiceId = (serviceId) => {
             const aboutItem = about.find(item => item.id == serviceId);
             return aboutItem ? aboutItem.bgImage : null;
@@ -63,47 +82,47 @@ export default async function BlogDetailsPage(props) {
 
         const localImage = getImageByServiceId(service.id);
 
-    
-        const safeCategory = typeof service.category === 'string' 
-            ? service.category 
+
+        const safeCategory = typeof service.category === 'string'
+            ? service.category
             : service.category?.name || 'Général';
 
-        const safeAuteur = typeof service.auteur === 'string' 
-            ? service.auteur 
+        const safeAuteur = typeof service.auteur === 'string'
+            ? service.auteur
             : service.auteur?.username || 'Admin';
 
-        const safeTags = Array.isArray(service.tags) 
-            ? service.tags 
+        const safeTags = Array.isArray(service.tags)
+            ? service.tags
             : [];
 
         return (
             <>
-            
-                        <div className="breadcrumb-wrapper">
-                            <div
-                                className="breadcumb"
-                                style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
-                            >
-                                <div className="container">
-                                    <div className="page-heading">
-                                        <h1 className="animate-fade-in">
-                                            {service.name}
-                                        </h1>
-                                        <ul className="breadcrumb-items animate-fade-in">
-                                            <li>
-                                                <Link scroll={false} href={`/`}>
-                                                    Accueil
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <i className="fas fa-chevrons-right" />
-                                            </li>
-                                            <li>Détails</li>
-                                        </ul>
-                                    </div>
-                                </div>
+
+                <div className="breadcrumb-wrapper">
+                    <div
+                        className="breadcumb"
+                        style={{ backgroundImage: "url(/assets/img/hero/breadcumbBg.png)" }}
+                    >
+                        <div className="container">
+                            <div className="page-heading">
+                                <h1 className="animate-fade-in">
+                                    {service.name}
+                                </h1>
+                                <ul className="breadcrumb-items animate-fade-in">
+                                    <li>
+                                        <Link scroll={false} href={`/`}>
+                                            Accueil
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <i className="fas fa-chevrons-right" />
+                                    </li>
+                                    <li>Détails</li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
+                </div>
                 <section className="news-standard fix space-top pb-425">
                     <div className="container">
                         <div className="news-details-area">
@@ -113,8 +132,8 @@ export default async function BlogDetailsPage(props) {
                                         <div className="single-blog-post">
                                             <Image
                                                 src={
-                                                    localImage || 
-                                                    (service.image 
+                                                    localImage ||
+                                                    (service.image
                                                         ? `${baseURL}/uploads/services/${service.image}`
                                                         : '/assets/img/blog/fallback.jpg')
                                                 }
@@ -126,15 +145,15 @@ export default async function BlogDetailsPage(props) {
                                             <div className="post-content">
                                                 <ul className="post-list d-flex align-items-center animate-fade-in">
                                                     <li>
-                                                        <FaCircleUser size={22} color="#e02234" /> 
+                                                        <FaCircleUser size={22} color="#e02234" />
                                                         {safeAuteur}
                                                     </li>
                                                     <li>
-                                                        <FaComments size={22} color="#e02234" /> 
+                                                        <FaComments size={22} color="#e02234" />
                                                         0 Commentaires
                                                     </li>
                                                     <li>
-                                                        <FaTag size={22} color="#e02234" /> 
+                                                        <FaTag size={22} color="#e02234" />
                                                         {safeCategory}
                                                     </li>
                                                 </ul>
@@ -164,13 +183,13 @@ export default async function BlogDetailsPage(props) {
                                                             <h6 className="d-inline me-2">Tags :</h6>
                                                             {safeTags.map((tag, index) => {
                                                                 // Vérifier si le tag est un objet ou une chaîne
-                                                                const tagText = typeof tag === 'string' 
-                                                                    ? tag 
+                                                                const tagText = typeof tag === 'string'
+                                                                    ? tag
                                                                     : tag.name || `Tag ${index}`;
-                                                                
+
                                                                 return (
-                                                                    <Link 
-                                                                        key={index} 
+                                                                    <Link
+                                                                        key={index}
                                                                         href={`/blog/tag/${tagText}`}
                                                                         className="inline-block bg-gray-100 px-3 py-1 rounded mr-2 mb-2"
                                                                     >
@@ -183,10 +202,10 @@ export default async function BlogDetailsPage(props) {
                                                     <div className="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end animate-fade-in">
                                                         <div className="social-share">
                                                             <span className="me-3">Partager :</span>
-                                                             <a href="https://www.facebook.com/Fireshieldsec/"><i className="fab fa-facebook-f" /></a>
-                                                        <a href="https://x.com/FireshieldSN/"><i className="fab fa-twitter" /></a>
-                                                        <a href="https://www.linkedin.com/company/fireshieldsecurity"><i className="fab fa-linkedin-in" /></a>
-                                                        <a href="#"><i className="fab fa-youtube" /></a>
+                                                            <a href="https://www.facebook.com/Fireshieldsec/"><i className="fab fa-facebook-f" /></a>
+                                                            <a href="https://x.com/FireshieldSN/"><i className="fab fa-twitter" /></a>
+                                                            <a href="https://www.linkedin.com/company/fireshieldsecurity"><i className="fab fa-linkedin-in" /></a>
+                                                            <a href="#"><i className="fab fa-youtube" /></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -205,7 +224,7 @@ export default async function BlogDetailsPage(props) {
                         </div>
                     </div>
                 </section>
-        
+
                 <Cta />
             </>
         );
@@ -214,7 +233,7 @@ export default async function BlogDetailsPage(props) {
             <div className="container py-20 text-center">
                 <h2 className="text-2xl mb-4">Erreur de chargement</h2>
                 <p className="text-red-500 mb-6">{error.message}</p>
-                <Link href="/infogerance" className="btn btn-primary">
+                <Link href="/strategies" className="btn btn-danger">
                     Retour aux services
                 </Link>
             </div>
