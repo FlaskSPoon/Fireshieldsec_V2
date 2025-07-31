@@ -1,14 +1,15 @@
 
-
 "use client"
+
 import Cta from "@/components/footers/Cta";
-import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/components/utils";
 import SeoMeta from "@/components/common/SeoMeta";
 import ServiceCard from "@/components/card/ServiceCard";
 import Link from "next/link";
 import { audit, conseil, gouvernance } from "@/data/servicesG";
 import { encodeId } from "@/app/hashids/hashids";
+import { useQuery } from "@tanstack/react-query";
+
 
 export default function Audit() {
   const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';

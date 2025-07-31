@@ -9,6 +9,7 @@ import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import config from "@/config/config.json";
+import { apiClient } from "../utils";
 
 export default function SiteMenu() {
   
@@ -23,9 +24,9 @@ export default function SiteMenu() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        containerRef.current && // Check if click is inside #mobileMenu
+        containerRef.current && 
         containerRef.current.contains(event.target) &&
-        contentRef.current && // Check if click is outside .gt-menu-area
+        contentRef.current && 
         !contentRef.current.contains(event.target)
       ) {
         closeSideMenu();
@@ -40,38 +41,64 @@ export default function SiteMenu() {
     };
   }, []);
   const form = useRef();
+const sandMail = async (e) => {
+  e.preventDefault();
+  const email = form.current.querySelector("input[type='email']").value;
 
-  const sandMail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", form.current, {
-        publicKey: "iG4SCmR-YtJagQ4gV",
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          toast.success("Message Sent successfully!", {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          form.current.reset();
-        } else {
-          toast.error("Ops Message not Sent!", {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
+  try {
+    await apiClient.subscribeToNewsletter({ email });
+
+    toast.success("Abonnement à la newsletter réussi !", {
+      position: "bottom-left",
+      autoClose: 5000,
+    });
+
+    form.current.reset();
+  } catch (error) {
+    if (error.response?.data?.message) {
+      toast.error(error.response.data.message, {
+        position: "bottom-left",
+        autoClose: 5000,
       });
-  };
+    } else {
+      toast.error("Erreur lors de l’abonnement à la newsletter.", {
+        position: "bottom-left",
+        autoClose: 5000,
+      });
+    }
+  }
+};
+  // const sandMail = (e) => {
+  //   e.preventDefault();
+  //   emailjs
+  //     .sendForm("service_noj8796", "template_fs3xchn", form.current, {
+  //       publicKey: "iG4SCmR-YtJagQ4gV",
+  //     })
+  //     .then((res) => {
+  //       if (res.status == 200) {
+  //         toast.success("Message Sent successfully!", {
+  //           position: "bottom-left",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //         });
+  //         form.current.reset();
+  //       } else {
+  //         toast.error("Ops Message not Sent!", {
+  //           position: "bottom-left",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //         });
+  //       }
+  //     });
+  // };
   return (
     <div
       ref={containerRef}

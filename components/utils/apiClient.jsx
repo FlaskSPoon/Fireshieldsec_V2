@@ -34,6 +34,56 @@ const apiClient = {
     } 
   },
 
+
+  post:async(endpoint, payload)=>{
+    const isFormData=payload instanceof FormData;
+    const response=await axiosInstance.post(endpoint, payload,{
+      headers:isFormData ? { 'Content-Type': 'multipart/form-data' } : undefined,
+    });
+    return response.data;
+  },
+
+
+toggleVisibility: async (id) => {
+  try {
+    const response = await axiosInstance.patch(`/comment/${id}/toggle-visibility`);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors du changement de statut :", error);
+    throw error;
+  }
+},
+
+subscribeToNewsletter: async (payload) => {
+  try {
+    const response = await axiosInstance.post("/newlettre", payload);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de l'inscription à la newsletter :", error);
+    throw error;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // create: async (endpoint, payload) => {
   //   const isFormData = payload instanceof FormData;
 

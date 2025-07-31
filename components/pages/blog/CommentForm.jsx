@@ -1,21 +1,51 @@
 "use client";
 
-export default function CommentForm() {
-  return (
-    <form id="contact-form" onSubmit={(e) => e.preventDefault()}>
+import { apiClient } from '@/components/utils';
+import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
+
+
+export default function CommentForm({ articleId=null, serviceId=null}) {
+
+  const formRef = useRef();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+      articleId,
+      serviceId,
+    };
+
+    try {
+      await apiClient.post("/comment", payload);
+      toast.success("Commentaire envoyé avec succès !");
+      formRef.current.reset();
+    } catch (error) {
+      console.error("Erreur:", error);
+      toast.error("Erreur lors de l'envoi du commentaire.");
+    }
+  };
+
+   return (
+    <form ref={formRef} onSubmit={handleSubmit}>
       <div className="row g-4">
         <div className="col-lg-6">
           <div className="form-clt">
-            <input type="text" name="name" id="name" placeholder="Votre nom" />
+            <input type="text" name="name" placeholder="Votre nom" required />
           </div>
         </div>
         <div className="col-lg-6">
           <div className="form-clt">
             <input
-              type="text"
+              type="email"
               name="email"
-              id="email2"
               placeholder="Votre email"
+              required
             />
           </div>
         </div>
@@ -23,9 +53,8 @@ export default function CommentForm() {
           <div className="form-clt">
             <textarea
               name="message"
-              id="message"
               placeholder="Votre message"
-              defaultValue={""}
+              required
             />
           </div>
         </div>

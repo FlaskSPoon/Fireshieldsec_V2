@@ -1,3 +1,5 @@
+
+
 import Image from "next/image";
 import CommentForm from "@/components/pages/blog/CommentForm";
 import Comments from "@/components/pages/blog/Comments";
@@ -195,7 +197,10 @@ const { id: hashedId } = await props.params;
                                                 <Comments />
                                                 <div className="comment-form-wrap pt-5 animate-fade-in">
                                                     <h3 className="text-2xl mb-4">Laisser un commentaire</h3>
-                                                    <CommentForm />
+                                                
+                                                    <CommentForm serviceId={service.id} />
+                                                  
+                                                      
                                                 </div>
                                             </div>
                                         </div>

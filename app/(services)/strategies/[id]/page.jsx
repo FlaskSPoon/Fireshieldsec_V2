@@ -213,7 +213,7 @@ export default async function BlogDetailsPage(props) {
                                                 <Comments />
                                                 <div className="comment-form-wrap pt-5 animate-fade-in">
                                                     <h3 className="text-2xl mb-4">Laisser un commentaire</h3>
-                                                    <CommentForm />
+                                                    <CommentForm serviceId={service.id} />
                                                 </div>
                                             </div>
                                         </div>
