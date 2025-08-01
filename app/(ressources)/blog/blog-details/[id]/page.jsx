@@ -6,6 +6,7 @@ import { about } from "@/data/servicesG";
 import { FaCircleUser, FaComments, FaTag } from "react-icons/fa6";
 import Link from "next/link";
 import Cta from "@/components/footers/Cta";
+import { decodeId, encodeId } from "@/app/hashids/hashids";
 
 const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
 
@@ -15,15 +16,21 @@ export async function generateStaticParams() {
         throw new Error(`Failed to fetch articles: ${res.status}`);
     }
     const articles = await res.json();
-    return articles.data.map(article => ({ id: article.id.toString() }));
+    return articles.data.map(article => ({
+         id: encodeId(article.id) }));
 }
 
-export default async function BlogDetailsPage({ params }) {
-    const { id } = params;
+export default async function BlogDetailsPage(props) {
+    const { id: hashedId } = await props.params;
+    const realId=decodeId(hashedId);
 
-    const res = await fetch(`${baseURL}/article/${id}`, { cache: 'no-store' });
+    if (!realId) {
+        throw new Error ("ID invalide");
+    }
+
+    const res = await fetch(`${baseURL}/article/${realId}`, { cache: 'no-store' });
     if (!res.ok) {
-        throw new Error(`Failed to fetch article ${id}: ${res.status}`);
+        throw new Error(`Failed to fetch article ${realId}: ${res.status}`);
     }
 
     const articleResponse = await res.json();

@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import ServiceCard from "@/components/card/ServiceCard";
 import { apiClient } from "@/components/utils";
+import { encodeId } from "@/app/hashids/hashids";
 
 
 
@@ -97,7 +98,7 @@ export default function Infogerance() {
                             content={truncateText(service.description, 100)}
                             category={service.category?.name}
                            image={info[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
-                            link={`/infogerance/${service.id}`}
+                            link={`/infogerance/${encodeId(service.id)}`}
                           
                           />
                         ))}
@@ -117,7 +118,7 @@ export default function Infogerance() {
                   <div className="">
                     <div className="bg-base-100 w-96 shadow-sm">
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {supportServices.slice(0,3).map((service, index) => (
+                        {supportServices.slice(0,300).map((service, index) => (
                           <ServiceCard
                             key={`support-${service.id}`}
                             serviceId={service.id}
@@ -131,7 +132,7 @@ export default function Infogerance() {
                             }
                             
 
-                            link={`/infogerance/${service.id}`}
+                            link={`/infogerance/${encodeId(service.id)}`}
                           />
                         ))}
                         

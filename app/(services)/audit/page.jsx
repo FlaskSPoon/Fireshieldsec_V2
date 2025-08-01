@@ -1,13 +1,15 @@
 
-
 "use client"
+
 import Cta from "@/components/footers/Cta";
-import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/components/utils";
 import SeoMeta from "@/components/common/SeoMeta";
 import ServiceCard from "@/components/card/ServiceCard";
 import Link from "next/link";
 import { audit, conseil, gouvernance } from "@/data/servicesG";
+import { encodeId } from "@/app/hashids/hashids";
+import { useQuery } from "@tanstack/react-query";
+
 
 export default function Audit() {
   const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.onrender.com';
@@ -94,7 +96,7 @@ const getImageByServiceId = (array, id) => {
                             content={truncateText(service.description, 100)}
                             category={service.category?.name}
                            image={audit[index]?.bgImage  ||  "/data/servicesG/internet-security.png"}
-                            link={`/audit/${service.id}`}
+                            link={`/audit/${encodeId(service.id)}`}
                           
                           />
                         ))}
@@ -128,7 +130,7 @@ const getImageByServiceId = (array, id) => {
                             }
                             
 
-                            link={`/audit/${service.id}`}
+                            link={`/audit/${encodeId(service.id)}`}
                           />
                         ))}
                         
@@ -160,7 +162,7 @@ const getImageByServiceId = (array, id) => {
                                 : gouvernance[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
                             }
                            
-                            link={`/audit/${service.id}`}
+                             link={`/audit/${encodeId(service.id)}`}
                           />
 
                         ))}

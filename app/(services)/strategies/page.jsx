@@ -8,6 +8,7 @@ import ServiceCard from "@/components/card/ServiceCard";
 import { detecter, proteger, reponse, strategie } from "@/data/servicesG";
 import { apiClient } from "@/components/utils";
 import { useQuery } from "@tanstack/react-query";
+import { encodeId } from "@/app/hashids/hashids";
 
 
 export default function Strategie() {
@@ -98,7 +99,7 @@ export default function Strategie() {
                             content={truncateText(service.description, 100)}
                             category={service.category?.name}
                             image={strategie[index]?.bgImage || "/data/servicesG/internet-security.png"}
-                            link={`/strategies/${service.id}`}
+                            link={`/strategies/${encodeId(service.id)}`}
 
                           />
                         ))}
@@ -131,7 +132,7 @@ export default function Strategie() {
                                 : detecter[index]?.bgImage || '/assets/img/icon/internet-security.png'
                             }
 
-                            link={`/strategies/${service.id}`}
+                            link={`/strategies/${encodeId(service.id)}`}
                           />
                         ))}
 
@@ -150,7 +151,7 @@ export default function Strategie() {
                     <div className="bg-base-100 w-96 shadow-sm">
                       <h2 className="p-4 text-dark">RÉPONSE</h2>
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {reponseServices.map((service, index) => (
+                        {reponseServices.slice(0, 300).map((service, index) => (
                           <ServiceCard
                             key={`reponse-${service.id}`}
                             serviceId={service.id}
@@ -163,7 +164,7 @@ export default function Strategie() {
                                 : reponse[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
                             }
 
-                            link={`/strategies/${service.id}`}
+                            link={`/strategies/${encodeId(service.id)}`}
                           />
 
                         ))}
@@ -185,7 +186,7 @@ export default function Strategie() {
                     <div className="bg-base-100 w-96 shadow-sm">
                       <h2 className="p-4 text-dark">PROTÉGER</h2>
                       <div className="service-card-wrapper style2 p-4 d-flex justify-centent-center">
-                        {protegerServices.map((service, index) => (
+                        {protegerServices.slice(0, 300).map((service, index) => (
                           <ServiceCard
                             key={`proteger-${service.id}`}
                             serviceId={service.id}
@@ -197,7 +198,7 @@ export default function Strategie() {
                                 ? `${baseURL}/uploads/services/${service.image}`
                                 : proteger[index]?.bgImage || '/assets/img/icon/padlock_3055803.png'
                             }
-                            link={`/strategies/${service.id}`}
+                            link={`/strategies/${encodeId(service.id)}`}
                           />
 
                         ))}

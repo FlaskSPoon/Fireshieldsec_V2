@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useRef } from "react";
 import { FaEnvelope, FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
 import config from "@/config/config.json";
+import { apiClient } from "@/components/utils";
 
 export default function Contact() {
   //data from config site
@@ -16,37 +17,63 @@ export default function Contact() {
   const [isOpen, setOpen] = useState(false);
   const form = useRef();
 
-  const sandMail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", form.current, {
-        publicKey: "iG4SCmR-YtJagQ4gV"
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          toast.success("Message Sent successfully!", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined
-          });
-          form.current.reset();
-        } else {
-          toast.error("Ops Message not Sent!", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined
-          });
-        }
-      });
+  const sendToBackend = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form.current);
+  const payload = {
+    nom: formData.get("nom"),
+    email: formData.get("email"),
+    message: formData.get("message"),
   };
+
+  try {
+    await apiClient.post("/contact", payload); 
+    toast.success("Message envoyé avec succès !", {
+      position: "bottom-right",
+      autoClose: 5000,
+    });
+    form.current.reset();
+  } catch (error) {
+    console.error("Erreur lors de l'envoi:", error);
+    toast.error("Erreur lors de l'envoi du message.", {
+      position: "bottom-right",
+      autoClose: 5000,
+    });
+  }
+};
+
+  // const sandMail = (e) => {
+  //   e.preventDefault();
+  //   emailjs
+  //     .sendForm("service_noj8796", "template_fs3xchn", form.current, {
+  //       publicKey: "iG4SCmR-YtJagQ4gV"
+  //     })
+  //     .then((res) => {
+  //       if (res.status == 200) {
+  //         toast.success("Message Sent successfully!", {
+  //           position: "bottom-right",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined
+  //         });
+  //         form.current.reset();
+  //       } else {
+  //         toast.error("Ops Message not Sent!", {
+  //           position: "bottom-right",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined
+  //         });
+  //       }
+  //     });
+  // };
   return (
     <>
       <section className="contact-section fix space">
@@ -149,11 +176,7 @@ export default function Contact() {
                       et vous accompagner dans la sécurisation de vos systèmes
                     </p>
                   </div>
-                  <form
-                    ref={form}
-                    onSubmit={sandMail}
-                    className="contact-form-items"
-                  >
+                  <form ref={form} onSubmit={sendToBackend} className="contact-form-items">
                     <div className="row g-4">
                       <div
                         className="col-lg-6 wow fadeInUp"
@@ -163,8 +186,8 @@ export default function Contact() {
                           <span>Votre nom*</span>
                           <input
                             type="text"
-                            name="name"
-                            id="name"
+                            name="nom"
+                            id="nom"
                             required
                             placeholder="Votre nom"
                           />
@@ -178,8 +201,8 @@ export default function Contact() {
                           <span>Votre adresse mail*</span>
                           <input
                             type="text"
-                            name="email2"
-                            id="email2"
+                            name="email"
+                            id="email"
                             required
                             placeholder="Votre adresse mail"
                           />
