@@ -243,7 +243,7 @@ const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.on
 
 export async function generateStaticParams() {
     try {
-        const res = await fetch(`${baseURL}/evenements/${realId}`);
+        const res = await fetch(`${baseURL}/evenements`);
         if (!res.ok) {
             console.error(`Erreur API: ${res.status}`);
             return [];
@@ -267,7 +267,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogDetailsPage(props) {
-    const { id: hashedId } = await props.params;
+    const { id: hashedId } = props.params;
    
     const realId = decodeId(hashedId);
 
