@@ -1,56 +1,56 @@
 export const parternCards = [
   {
-    id: 29,
+    id: 1,
     thumbSrc: "/assets/img/service/serviceThumb2_1.png",
     link: "https://www.microsoft.com/",
     delay: ".3s",
     hasRipple: true
   },
   {
-    id: 30,
+    id: 2,
     thumbSrc: "/assets/img/service/serviceThumb2_2.png",
     link: "https://www.dell.com/",
     delay: ".6s"
   },
   {
-    id: 31,
+    id: 4,
     thumbSrc: "/assets/img/service/serviceThumb2_3.png",
     link: "https://partners.comptia.org/",
     delay: ".9s"
   },
   {
-    id: 32,
+    id: 3,
     thumbSrc: "/assets/img/service/serviceThumb2_4.png",
     link: "https://pecb.com/",
     delay: "1.2s"
   },
   {
-    id: 33,
+    id: 5,
     thumbSrc: "/assets/img/service/serviceThumb2_5.png",
     link: "https://www.ibm.com/",
     delay: "1.3s",
     hasRipple: true
   },
   {
-    id: 34,
+    id: 6,
     thumbSrc: "/assets/img/service/serviceThumb2_6.png",
     link: "https://www.fortinet.com/",
     delay: "1.5s"
   },
   {
-    id: 35,
+    id: 7,
     thumbSrc: "/assets/img/service/serviceThumb2_7.png",
     link: "https://www.veeam.com/",
     delay: "1.7s"
   },
   {
-    id: 36,
+    id: 8,
     thumbSrc: "/assets/img/service/serviceThumb2_8.png",
     link: "https://www.knowbe4.com/",
     delay: "1.9s"
   },
   {
-    id: 36,
+    id: 9,
     thumbSrc: "/assets/img/service/tenable.png",
     link: "https://fr.tenable.com/",
     delay: "1.9s"

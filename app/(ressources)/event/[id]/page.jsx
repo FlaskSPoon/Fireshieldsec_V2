@@ -243,7 +243,7 @@ const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://back-end-b30o.on
 
 export async function generateStaticParams() {
     try {
-        const res = await fetch(`${baseURL}/evenements`);
+        const res = await fetch(`${baseURL}/evenements/${realId}`);
         if (!res.ok) {
             console.error(`Erreur API: ${res.status}`);
             return [];

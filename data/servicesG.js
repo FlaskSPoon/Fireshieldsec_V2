@@ -41,6 +41,10 @@ export const servicesG = [
     {
       id:3,
       bgImage: "/assets/img/icon/wcuIcon1_3.png",
+    },
+     {
+      id:4,
+      bgImage: "/assets/img/icon/laptop_1.png",
     }
   ];
 
