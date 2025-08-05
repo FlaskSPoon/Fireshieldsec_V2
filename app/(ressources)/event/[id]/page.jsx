@@ -267,7 +267,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogDetailsPage(props) {
-    const { id: hashedId } = await props.params;
+    const { id: hashedId } = props.params;
    
     const realId = decodeId(hashedId);
 
